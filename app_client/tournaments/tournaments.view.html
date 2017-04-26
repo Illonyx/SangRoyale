@@ -1,0 +1,10 @@
+<navigation></navigation>
+<h1>Tournois terminés</h1>
+<div id="tournamentsContainer">
+  <div class="tournamentContainer" ng-repeat="tournamentElem in vm.tournaments track by tournamentElem.tournament.name">
+    <h3><a href="{{tournamentElem.tournament.full_challonge_url}}">{{tournamentElem.tournament.name}}</a></h3>
+    <!--<i>Tournoi de type {{tournament.tournament_type}} - {{tournament.participants_count}}</i>-->
+    <br/>
+  </div>
+</div>
+<h1>Statistiques</h1>
