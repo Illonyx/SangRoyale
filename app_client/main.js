@@ -24,10 +24,29 @@
         controller: 'profileCtrl',
         controllerAs: 'vm'
       })
+      .when('/about', {
+        templateUrl: '/about/about.view.html',
+        controller: 'tournamentsCtrl',
+        controllerAs: 'vm'
+      })
       .when('/tournaments', {
         templateUrl: '/tournaments/tournaments.view.html',
         controller: 'tournamentsCtrl',
         controllerAs: 'vm'
+      })
+      .when('/loyalty', {
+        templateUrl: '/loyalty/loyalty.view.html',
+        controller: 'loyaltyCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/other/guides', {
+        templateUrl: '/other/other.guides.view.html'
+      })
+      .when('/other/media', {
+        templateUrl: '/other/other.media.view.html'
+      })
+      .when('/other/updatelog', {
+        templateUrl: '/other/other.update-app-log.view.html'
       })
       .otherwise({redirectTo: '/'});
 

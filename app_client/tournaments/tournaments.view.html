@@ -1,5 +1,11 @@
 <navigation></navigation>
-<h1>Tournois terminés</h1>
+
+<h1 id="info">Informations - Reglement/Tournois à thème</h1>
+<p>Contiendra des infos sur les tournois à gemmes</p>
+<p>Contiendra tout le règlement des tournois Challonge. </p>
+<p>Contiendra le document explicatif de Hack</p>
+
+<h1 id="history">Historique</h1>
 <div id="tournamentsContainer">
   <div class="tournamentContainer" ng-repeat="tournamentElem in vm.tournaments track by tournamentElem.tournament.name">
     <h3><a href="{{tournamentElem.tournament.full_challonge_url}}">{{tournamentElem.tournament.name}}</a></h3>
@@ -7,4 +13,11 @@
     <br/>
   </div>
 </div>
-<h1>Statistiques</h1>
+
+<h1 id="planning">Planning</h1>
+<p>Mettre les tournois qui seront organisés dans un calendrier</p>
+<p>Il peut y avoir des règles à mettre en place pour un tournoi spécifique</p>
+<p>Il y aura un bouton s'Inscrire qui amenera à une redirection sur la page de login si le user est pas co</p>
+<p>Le tournoi qui sera programmé au plus jeune sera mis dans la home page du site</p>
+<p>Un mécanisme de notification devra être mis en place pour alerter d'un tournoi (à débattre) : 
+Webmail/Google Agenda dans un 1er temps et peut etre plus tard notif push</p>
