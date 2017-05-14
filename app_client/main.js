@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module('meanApp', ['ngRoute', 'ui.bootstrap']);
+  angular.module('sangRoyaleApp', ['ngRoute', 'ui.bootstrap']);
 
   function config ($routeProvider, $locationProvider) {
     $routeProvider
@@ -63,7 +63,7 @@
   }
   
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .config(['$routeProvider', '$locationProvider', config])
     .run(['$rootScope', '$location', 'authentication', run]);
 

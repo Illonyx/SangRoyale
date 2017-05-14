@@ -1,7 +1,7 @@
 (function () {
 
   angular
-  .module('meanApp')
+  .module('sangRoyaleApp')
   .controller('tournamentsCtrl', tournamentsCtrl);
 
   tournamentsCtrl.$inject = ['$location', 'tournaments'];

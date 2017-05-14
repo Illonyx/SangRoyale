@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .service('authentication', authentication);
 
   authentication.$inject = ['$http', '$window'];

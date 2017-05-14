@@ -1,7 +1,7 @@
 (function() {
   
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .controller('aboutCtrl', aboutCtrl);
 
     //Sera à remplir ultérieurement

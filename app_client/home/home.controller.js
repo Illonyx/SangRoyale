@@ -1,7 +1,7 @@
 (function() {
   
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .controller('homeCtrl', homeCtrl);
 
     function homeCtrl () {

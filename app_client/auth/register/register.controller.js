@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .controller('registerCtrl', registerCtrl);
 
   registerCtrl.$inject = ['$location', 'authentication'];

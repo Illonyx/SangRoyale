@@ -1,7 +1,7 @@
 (function() {
   
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .controller('loyaltyCtrl', loyaltyCtrl);
 
     //Sera à remplir ultérieurement

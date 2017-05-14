@@ -1,7 +1,7 @@
 (function() {
 
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .service('tournaments', tournaments);
 
   tournaments.$inject = ['$http'];

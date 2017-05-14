@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('meanApp')
+    .module('sangRoyaleApp')
     .directive('navigation', navigation);
 
   function navigation () {
