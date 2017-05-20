@@ -14,6 +14,39 @@
 </div>
 -->
 
+<style>
+
+.dropdown-user {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-user a:hover {background-color: #f1f1f1}
+
+.dropdown-user a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.connections:hover .dropdown-user 
+{
+    display: block;
+}
+
+img.userpicture
+{ 
+  width : 65px;
+  height : 65px;
+}
+</style>
+
 <!-- container-fluid is probably better for mobile -->
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
   
@@ -21,9 +54,15 @@
     
   
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" 
+              data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" href="/">
-        <!-- Link with image src="https://drive.google.com/uc?id=0B5Md9jlPGF0MTWZkZEE0eENod2M"-->
-        <img alt="Sang Royale Website">
+        <img src="images/sangRoyaleTransp.png" alt="Sang Royale Website" style="max-width:100px; margin-top: -7px;">
       </a>
     </div>
   
@@ -86,67 +125,4 @@
       <!-- Search bar is not useful now
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      -->
-      
-
-
-      <ul class="nav navbar-nav navbar-right">
-        <!--<li><p class="navbar-text">Already have an account?</p></li>-->
-        <li><p class="navbar-text"><a href="login">Connection</a></p></li>
-        <li><p class="navbar-text"><a href="register">S'inscrire</a></p></li>
-        <!-- <li><a href="login"><p class="navbar-text whatd">Connection</p></a></li>-->
-        <!--
-        <li>
-          <button type="button" class="btn btn-link sr-navbar-btn" id="sr-navbar-btn-register">
-            <a href="register" class="navbar-text whatd">S'inscrire</a>
-          </button>
-        </li>
-        -->
-
-        <!--
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-        
-
-        
-        <ul id="login-dp" class="dropdown-menu">
-          <li>
-            <div class="row">
-
-              <div class="col-md-12">
-                Login via
-                <div class="social-buttons">
-                  <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                  <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                </div>
-                                  or
-                <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                <div class="form-group">
-                  <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-                </div>
-                <div class="form-group">
-                  <label class="sr-only" for="exampleInputPassword2">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                  <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                </div>
-                <div class="bottom text-center">
-                  New here ? <a href="#"><b>Join Us</b></a>
-                </div>
-              </div>
-
-
-            </div>
-          </li>
-          -->
-        </ul>
-
-  </div><!-- /.container-fluid -->
-</nav>
+          <input type="text" class="form-control" placeholder="Search"
