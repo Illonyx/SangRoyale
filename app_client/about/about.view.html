@@ -1,8 +1,15 @@
 <navigation></navigation>
 
+<p id="last-edition-date">{{vm.lasteditiondate}}</p>
+
 <h1 id="clan">Présentation du clan en général</h1>
 <p>Il s'agira de présenter le clan ici</p>
 <p>On pourra évoquer aussi nos valeurs dans cette 1ere présentation</p>
+
+<div class="clanInfoContainer" ng-repeat="clanElem in vm.claninfo track by clanElem.name">
+    <h3>{{clanElem.id}}/{{clanElem.name}}</h3>
+</div>
+
 
 <h1 id="activities">Activités</h1>
 <p>Il s'agira de présenter les activités du clan</p>

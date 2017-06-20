@@ -28,6 +28,7 @@ module.exports.tournaments = function(req, res) {
         console.log("Result" + JSON.stringify(result));
         res.status(200).json(result);
       });
+  };
   
 /*
   challongeResults = filterObjectTableWithKeys(challongeResults, "tournament", ["id", "name", "url", "tournament_type", "completed_at", "full_challonge_url", "participants_count"]);
@@ -74,5 +75,5 @@ function findUserMatches(userId, matches){
 
 */
 
-};
+
 

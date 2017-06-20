@@ -26,7 +26,7 @@
       })
       .when('/about', {
         templateUrl: '/about/about.view.html',
-        controller: 'tournamentsCtrl',
+        controller: 'aboutCtrl',
         controllerAs: 'vm'
       })
       .when('/tournaments', {
