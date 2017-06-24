@@ -1,14 +1,97 @@
 <navigation></navigation>
 
-<p id="last-edition-date">{{vm.lasteditiondate}}</p>
+<!-- Le passer en italique -->
+<p id="last-edition-date">Page mise à jour le {{vm.lasteditiondate}}</p>
 
-<h1 id="clan">Présentation du clan en général</h1>
-<p>Il s'agira de présenter le clan ici</p>
-<p>On pourra évoquer aussi nos valeurs dans cette 1ere présentation</p>
+<!-- <p>Il s'agira de présenter le clan ici</p> -->
+<!-- <p>On pourra évoquer aussi nos valeurs dans cette 1ere présentation</p> -->
 
-<div class="clanInfoContainer" ng-repeat="clanElem in vm.claninfo track by clanElem.name">
-    <h3>{{clanElem.id}}/{{clanElem.name}}</h3>
+<!-- Encadrer ceci -->
+<div id="synthesis-data">
+	<p class="editable"><strong>Données importantes</strong><br/><br/>
+	<div class="clanInfoIds" ng-repeat="clanElem in vm.claninfo track by clanElem.name">
+	    <p><span class="synthesis-field">ID du clan {{clanElem.name}} ({{clanElem.membersNumber}} mb)</span> : <span class="synthesis-value">{{clanElem.id}}</span></p>
+	</div>
+	<p><span class="synthesis-field">Niveau de recrutement</span> : <span class="synthesis-value">
+		<span ng-repeat="clanElem in vm.claninfo track by clanElem.name">{{clanElem.name}} {{clanElem.requiredTrophies}} / </span>
+	</span></p>
+
+
+	<p><span class="synthesis-field">Système de discussion</span> : <span class="synthesis-value">Discord (Id Discord Sang Royale : kgNDsht)</span></p>
+	<p><span class="synthesis-field">Tournoi</span>:<span class="synthesis-value">A gemmes, Challonge</span></p>
+	<p><span class="synthesis-field">Site Web</span> : <span class="synthesis-value">Sortie prévue fin Juillet, développement en cours</span></p>
+	<p><span class="synthesis-field">Trophées max clan Sang Royale</span> : <span class="synthesis-value">{{vm.claninfo[0].bestScoreClan}} (A toujours dépasser bien entendu :D)</span></p>
+	<p><span class="synthesis-field">Site Web</span> : <span class="synthesis-value">Sortie prévue fin Juillet, developpement en cours</span></p>
 </div>
+<br/>
+
+<div id="sr-topic-introduction">
+	<p id="sr-intro-prince"> Mon Prince,</p><br />
+	<p>Tu ne pense qu'à <strong>boire de l'élixir, secourir des princesses et faire la course avec ton alter-égo ténébreux</strong> ? Ton seul désir est d'écraser tes adversaires avec ta superbe lance et boire du bon vin après la joute?<br />
+	<strong>Tu devrais donc venir dans le clan des vrais descendants d'Isildur, pas celui des pauvres écuyers !</strong></p>
+	<center><img src="images/sang_royale.jpg" alt="logo Sang Royale" title="logo Sang Royale"/></center>
+</div>
+<div id="sr-topic-presentation">
+	
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <h1 id="activities">Activités</h1>
