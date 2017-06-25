@@ -1,7 +1,7 @@
 <navigation></navigation>
 
 <!-- Le passer en italique -->
-<p id="last-edition-date">Page mise à jour le {{vm.lasteditiondate}}</p>
+<p id="last-edition-date">Page mise à jour le {{vm.lasteditiondate}}</p><br/>
 
 <!-- <p>Il s'agira de présenter le clan ici</p> -->
 <!-- <p>On pourra évoquer aussi nos valeurs dans cette 1ere présentation</p> -->
@@ -21,7 +21,7 @@
 	<p><span class="synthesis-field">Tournoi</span>:<span class="synthesis-value">A gemmes, Challonge</span></p>
 	<p><span class="synthesis-field">Site Web</span> : <span class="synthesis-value">Sortie prévue fin Juillet, développement en cours</span></p>
 	<p><span class="synthesis-field">Trophées max clan Sang Royale</span> : <span class="synthesis-value">{{vm.claninfo[0].bestScoreClan}} (A toujours dépasser bien entendu :D)</span></p>
-	<p><span class="synthesis-field">Site Web</span> : <span class="synthesis-value">Sortie prévue fin Juillet, developpement en cours</span></p>
+	<p><span class="synthesis-field">Nombre de 4k en fin de saison</span> : <span class="synthesis-value">{{vm.claninfo[0].nombre4kFinSaison}}</span></p>
 </div>
 <br/>
 
@@ -30,77 +30,216 @@
 	<p>Tu ne pense qu'à <strong>boire de l'élixir, secourir des princesses et faire la course avec ton alter-égo ténébreux</strong> ? Ton seul désir est d'écraser tes adversaires avec ta superbe lance et boire du bon vin après la joute?<br />
 	<strong>Tu devrais donc venir dans le clan des vrais descendants d'Isildur, pas celui des pauvres écuyers !</strong></p>
 	<center><img src="images/sang_royale.jpg" alt="logo Sang Royale" title="logo Sang Royale"/></center>
-</div>
-<div id="sr-topic-presentation">
-	
-	
+	<br/>
 </div>
 
+<div id="sr-topic-main-general">
+	<h2 class="centered">Notre Royaume</h2>
+	<br/>
+	<div id="sr-topic-our-kingdom">
+		<p>Sang Royale est un clan fondé depuis déjà une bonne année. J'ai personnellement commencé à jouer très tôt (avant même sa sortie en France).Notre but initial était d'évoluer ensemble dans la convivialité et de monter jusqu'à l'arène légendaire tous ensemble mais aujourd'hui, nous n'avons plus qu'un objectif en tête!</p>
+		<p class="important">C'est celui de monter top 200 FR! Et nous n'en sommes pas loin !</p>
+		<p>En effet, cette saison, nous ne sommes qu'à 1000 points d'y aller dans ce top! Notre chef Maz a atteint les <span class="important">5490</span> points à la dernière saison et a été plusieurs fois dans le top FR. Dans le clan Sang Royale, <span class="important">42 membres sur les 50</span> ont déjà été à plus de <span class="important">4000</span> tr.</p>
+		<p class="important">Seulement, il nous manque juste un petit quelque chose, et c'est votre talent ! #SangRoyaleSpirit</p>
+
+		<p>Nous nous sommes organisés en conséquence pour trouver la "nouvelle star" et en fonction des différents trophées de nos membres et du nombre croissant de demandes, nous avons crée 3 clans nommés (logiquement :D) Sang Royale, Sang Royale II et Sang Royale III</p>
+		<!--
+		<span ng-repeat="clanElem in vm.claninfo track by clanElem.name">
+			<p>Présentation de chaque clan individuelle à paramétrer</p>
+			<br/>
+			
+			<caption>Top 5 {{clanElem.name}}, saison </caption>
+		<span>
+		-->
+		<!-- 
+Petite photo du top (avant remise des trophés à 4000), fin Avril 2017<br />
+<img src="https://puu.sh/vRNP1/d00139de24.jpg" alt="top clan" title="top clan"/><br /><br />
+Notre clan école Sang Rotyale II ouvert depuis le 24 Février (touuuut jeune). Il est conseillé d'avoir autour des 2800 trophés pour intégrer le clan, nous sommes quasiment toujours complets ! :'( <br />
+Ce clan a pour but d'être le clan école de Sang Royale. <br />
+Capture du top, fin Avril 2017<br />
+<img src="https://puu.sh/vRNRy/d078ae03ea.jpg" alt="top clan 2" title="top clan 2"/><br /><br />
+</p>
+<p class="redtext">
+NEW : Comme on n'avait jamais assez de placve dans Sang Royale II, nous avons créé un Sang Royale III qui recrute en ce moment même.(qui a ouvert le 16/04 :D)<br />
+Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
+</p> -->
 
 
+	</div>
+	<br/>
+</div>
+
+<div id="sr-topic-activities">
+	<h2 class="centered" id="sr-activities-title">Nos activités</h2>
+	<br/>
+	<h3 class="centered">Nos tournois</h3>
+	<p>Imaginez des nobles chevaliers sans tournois ! Il faut bien montrer notre honneur !</p><br />
+	<div id="sr-topic-gem-tournaments">
+		<h4 class="centered important">Tournois à gemmes</h4>
+		<p>Nous en faisons un <strong>toutes les semaines</strong> (souvent lundi ou jeudi) ou pour des evenements majeurs ;D</p>
+		<p>Le nom du tournoi et le mot de passe sont envoyés par message de clan et Discord. Les inscriptions commencent à partir de 19h et le combat commence à 21h généralement</p>
+		<p>Nous remplissons d'abord nos membres en priorité puis on ouvre de plus en plus pour passer une heure à fond en prenant <stong>le plus de plaisir</stong> et même pour les plus valeureux, du <strong>bon butin</strong> !<br />
+		La plupart du temps, nous faisons des tournois entre nos 2 clans. ça suffit généralement à remplir :D</p>
+		<p>Nous sommes aussi ouverts à des tournois <span class="important">avec des clans partenaires</span>. Si ceci vous intéresse, vous pouvez me contacter sur notre Discord (bientot par le site)</p>
+		<br/>
+	</div>
+	<div id="sr-topic-challonge-tournaments">
+		<h4 class="centered important">Tournois challonge (maison)</h4>
+		<p>Ce sont de tournois essentiellement <span class="important">réservés aux membres du clan</span>. Nous avons fait jusqu'ici plutôt des tournois à élimination directe
+		mais nous sommes en train de refaire le système pour toujours plus de fun. Nous comptons introduire des tournois 2v2 ou des tournois à thème. 
+		Vous pouvez en savoir plus sur le site dans la section Tournois (reglement tournois, inscription, organisation)</p>
+		</p>
+		<!-- Tournois challonges organisés / Lien du dernier tournoi -->
+		<p>Nous sommes déjà à <strong>6 tournois d'organisés</strong> ! Nous avons l'intention de les reprendre cet été, et d'éventuellement <span class="important">rajouter des regles fun</span> :D</p>
+		<p><span class="important">Lien dernier challonge</span> : <a href=https://challonge.com/fr/SangRoyaleT6>Sang Royale T6</a></p>
+		<br/>
+		<!-- Mettre plutot le lien vers le compte Tournaments SR<!-->
+	</div>
+	<h3 class="centered">Notre table ronde - Discord (code : <span class="important">kgNDsht</span>)</h3>
+	<div id="sr-topic-challonge-communication">
+		<br/>
+		<p>Clash Royale étant basé sur la <span class="important">collaboration</span> et le <span class="important">partage</span>, notre volonté est de <span class="important">souder  des liens entre les membres et de créer une ambiance de clan unique</span></p>
+		<p>Nous avons mis en place <strong>Discord</strong>, une plateforme de communication cross-plateformes pour permettre une réelle <strong>cohésion</strong>! Nous avons notamment <strong>une salle de chat pour les 3 clans</strong> afin d'effacer les barrières entre les 2 clans. <br /><br /></p>
+		<!-- Discord Members -->
+		<p>Sur les membres des clans Sang Royale, <span class="important">80 personnes sont connectées à Discord</span>, ce qui nous permet d'avoir une vraie communauté et des échanges simples. Les joueurs les plus expérimentés viennent coacher les plus petits : <span class="important"> partage de decks ou coaching vocal</span> pendant des parties. C'est aussi très utile de communiquer lors de parties 2v2. </p>
+		<br/>
+		<p>Discord n'est pas qu'une simple plateforme de communication. Nous avons installé des "bots" très utiles comme : </p>
+		<ul>
+			<li>Stats : ce bot vous permet d'avoir <span>vos statistiques Clash Royale à la demande</span> : cycle de coffres, nombre de Vict/Défaites :D</li>
+			<li>Challonge : ce bot vous permet de vous inscrire facilement aux différents tournois maison organisés par le clan très facilement</li>
+			<li>Jarvis : un bot qui permet d'écrire des messages WTF. Juste hilarant! </li>
+		</ul>
+
+		<p>Vous pouvez rejoindre notre discord en cliquant sur ce superbe bouton bleu : </p>
+	</div>
+	<div class="centered">
+		<a class="btn btn-lg btn-primary" href="https://discordapp.com/invite/kgNDsht" role="button">Aller sur notre Discord</a>
+	</div>
+	
+	<br/>
+
+	<h3>Sang Royale sur le Web/Media</h3>
+	<div id="sr-topic-challonge-media">
+	<p>Nous avons un projet de <strong>site web</strong> sur lequel utilisateurs pourront :<br />
+	<ul>
+		<li>Voir le règlement du clan et des tournois</li>
+		<li>Etre <strong>notifiés des lancements des tournois</strong> maison</li>
+		<li>Consulter leur <strong>résultats de tournois</strong> / Pourquoi pas mettre en place des succès</li>
+	</ul>
+	<p><strong>Développeurs, que vous sachiez (ou pas) faire du front, du back voire même de la spec, vous êtes les bienvenus si vous voulez contribuer :D</strong>
+	Le projet est en cours, vous pouvez même voir nos activités ici : <a href="https://trello.com/b/ualQgVEV/site-sang-royale">Trello</a></p>
+
+	<br/>
+	<p>Nous voulons aussi affirmer notre présence sur Youtube et Twitch : nous recherchons donc des youtubers/twitcheurs qui commenteraient nos évenements/feraient des tutos, des points sur les dernières mises à jour. Si vous voulez faire partie de ce projet, demandez Skyice sur notre Discord. </p>
+	<p>Nous allons d'ailleurs lancer une chaine Twitch Sang Royale en Juillet.</p>
+	<br/>
+	</div>
+</div>
+<div id="sr-topic-candidates">
+	<h2 class="centered" id="sr-topic-candidates-title">Nous rejoindre</h2>
+	<br/>
+	<div id="sr-topic-candidate-profile">
+		<h3>Profil recherché</h3>
+		<br/>
+		<p>Trois piliers:</p>
+		<ul>
+			<li><p><span class="important">Dons, activité </span>: Faire des dons. On est dans un clan pour partager une expérience de jeu (et en plus donner permet d'avoir de l'or).
+			Nous excluons ou dégradons par défaut un joueur qui n'a pas fait de dons sur une semaine, sauf si le joueur
+			a prévenu de son éventuelle absence car oui, bien sûr on a tous une vie!</p>
+			</li>
+			<li><p><span class="important">Participation au coffre/combat de clan</span> : 
+			Nous recherchons des joueurs capables de se motiver pour aller faire un max de couronnes. Les joueurs qui ne peuvent pas s'investir totalement pendant <span class="important"> les 3 jours sont priés de s'excuser à l'avance, sous peine de sanction. (dégradation/exclusion si récidive)</span> Nous gardons quand même un côté humain, nous n'aimons simplement pas les "profiteurs".
+			J'estime qu'un joueur devrait être capable de faire <span class="important">au moins 10 couronnes en 2 jours (et encore c'est peu)</span>. 
+			Nous envisageons dans le futur de donner des récompenses aux meilleurs performeurs.</p>
+			</li>
+			<li>
+				<span class="important">Investissement Général : tournois, Discord</span>
+				<p>
+					Je souhaite que les nouveaux membres de Sang Royale s'inscrivent directement après leur arrivée (demander à un adjoint). Ce n'est <span class="important">pas obligatoire mais fortement recommandé</span> pour une bonne expérience de jeu! 
+					Ceci permet un transfert d'infos rapide (On peut se parler en pv si besoin) et le bot Stats change vraiment la vie pour un joueur de CR. :D 
+				</p>
+				<p>Les tournois (Challonge ou à gemmes) ne sont pas non plus une obligation, mais pour ceux qui s'inscriront, vous verrez, c'est très sympa!</p>
+			</li>
+		</ul>
+		<br/>
+
+		<p>
+			Enfin, l'art de la haute chevalerie reste le combat de haut niveau. Alors partagez vos games, regardez celles des autres(surtout celles du chef :D), soyez curieux! C'est comme ça que vous atteindrez la barre des 4000 trophées! (Et que tout le clan passera Top 200 FR :D)
+		</p>
+	</div>
+	<div id="sr-topic-candidate-state">
+		<p></p>
+
+	</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1 id="activities">Activités</h1>
-<p>Il s'agira de présenter les activités du clan</p>
-<p>Nos tournois, notre Discord, notre bot, nos éventuels yt/twitcheurs</p>
-
-<h1 id="candidates">Nous rejoindre</h1>
-<h2>Etat du recrutement</h2>
-<h2>Contact</h2>
-<p>Il faudra mettre les conditions et les attentes de recrutement pour chaque clan</p>
+<!--
 <p>On pourra également mettre en place un input qui permettra à la personne d'envoyer un message</p>
 <p>On pensera à mettre un captcha pour pas qu'elle puisse spammer</p>
+-->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
