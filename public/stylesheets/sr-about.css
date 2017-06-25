@@ -28,3 +28,13 @@
 	color : blue;
 	font-weight: bold;
 }
+
+.veryimportant {
+	color : red;
+	font-weight : red;
+}
+
+#sr-topic-availability-container {
+	border-style: solid;
+	border-width: medium;
+}

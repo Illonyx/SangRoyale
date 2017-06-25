@@ -13,6 +13,9 @@
     	console.log("Data" + data);
         vm.lasteditiondate = data.lasteditiondate;
         vm.claninfo = data.claninfo;
+        vm.discordmembers=data.discordmembers;
+        vm.topicLinkJV=data.topicLinkJV;
+        vm.topicLinkCrFR=data.topicLinkCrFR;
       })
       .error(function (e) {
         console.log(e);

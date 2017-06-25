@@ -99,9 +99,9 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 	<div id="sr-topic-challonge-communication">
 		<br/>
 		<p>Clash Royale étant basé sur la <span class="important">collaboration</span> et le <span class="important">partage</span>, notre volonté est de <span class="important">souder  des liens entre les membres et de créer une ambiance de clan unique</span></p>
-		<p>Nous avons mis en place <strong>Discord</strong>, une plateforme de communication cross-plateformes pour permettre une réelle <strong>cohésion</strong>! Nous avons notamment <strong>une salle de chat pour les 3 clans</strong> afin d'effacer les barrières entre les 2 clans. <br /><br /></p>
+		<p>Nous avons mis en place <strong>Discord</strong>, une plateforme de communication cross-plateformes pour permettre une réelle <strong>cohésion</strong>! Nous avons notamment <strong>une salle de chat pour les 3 clans</strong> afin d'effacer les barrières entre les 3 clans. <br /><br /></p>
 		<!-- Discord Members -->
-		<p>Sur les membres des clans Sang Royale, <span class="important">80 personnes sont connectées à Discord</span>, ce qui nous permet d'avoir une vraie communauté et des échanges simples. Les joueurs les plus expérimentés viennent coacher les plus petits : <span class="important"> partage de decks ou coaching vocal</span> pendant des parties. C'est aussi très utile de communiquer lors de parties 2v2. </p>
+		<p>Sur les membres des clans Sang Royale, <span class="important">{{vm.discordmembers}} personnes sont connectées à Discord</span>, ce qui nous permet d'avoir une vraie communauté et des échanges simples. Les joueurs les plus expérimentés viennent coacher les plus petits : <span class="important"> partage de decks ou coaching vocal</span> pendant des parties. C'est aussi très utile de communiquer lors de parties 2v2. </p>
 		<br/>
 		<p>Discord n'est pas qu'une simple plateforme de communication. Nous avons installé des "bots" très utiles comme : </p>
 		<ul>
@@ -118,7 +118,7 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 	
 	<br/>
 
-	<h3>Sang Royale sur le Web/Media</h3>
+	<h3 class="centered">Sang Royale sur le Web/Media</h3>
 	<div id="sr-topic-challonge-media">
 	<p>Nous avons un projet de <strong>site web</strong> sur lequel utilisateurs pourront :<br />
 	<ul>
@@ -130,7 +130,7 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 	Le projet est en cours, vous pouvez même voir nos activités ici : <a href="https://trello.com/b/ualQgVEV/site-sang-royale">Trello</a></p>
 
 	<br/>
-	<p>Nous voulons aussi affirmer notre présence sur Youtube et Twitch : nous recherchons donc des youtubers/twitcheurs qui commenteraient nos évenements/feraient des tutos, des points sur les dernières mises à jour. Si vous voulez faire partie de ce projet, demandez Skyice sur notre Discord. </p>
+	<p class="veryimportant">Nous voulons aussi affirmer notre présence sur Youtube et Twitch : nous recherchons donc des youtubers/twitcheurs qui commenteraient nos évenements/feraient des tutos, des points sur les dernières mises à jour. Si vous voulez faire partie de ce projet, demandez Skyice sur notre Discord. </p>
 	<p>Nous allons d'ailleurs lancer une chaine Twitch Sang Royale en Juillet.</p>
 	<br/>
 	</div>
@@ -139,7 +139,7 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 	<h2 class="centered" id="sr-topic-candidates-title">Nous rejoindre</h2>
 	<br/>
 	<div id="sr-topic-candidate-profile">
-		<h3>Profil recherché</h3>
+		<h3 class="centered">Profil recherché</h3>
 		<br/>
 		<p>Trois piliers:</p>
 		<ul>
@@ -168,8 +168,31 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 		</p>
 	</div>
 	<div id="sr-topic-candidate-state">
-		<p></p>
+		<h3 class="centered">Etat du recrutement actuel/Postuler</h3>
+		
+		<div id="sr-topic-availability-container">
+			<div id="sr-topic-availability" ng-repeat="clanElem in vm.claninfo track by clanElem.name">	
+				<p><span class="important">{{clanElem.name}}</span> (Seuil trophées: {{clanElem.requiredTrophies}}) : <span class="important">{{clanElem.availablePlaces}}</span></p>
+			</div>
+		</div>
+		<br/>
+		
+		<p class="important">Pour postuler : </p>
+		<ul>
+			<!-- Donnée variable-->
+			<li>Vous pouvez venir sur Discord directement par le lien que je vous ai donné plus haut</li>
+			<li>Si vous avez un compte jeuxvideos.com : <a href="{{vm.topicLinkJV}}">ici</a></li>
+			<li>Si vous avez un compte sur ClashRoyalefr.fr : <a href="{{vm.topicLinkCrFR}}">ici</a></li>
+			<li>Directement Sur le site (BIENTOT)</li>
+			<li>Ingame mais vous aurez moins de chance d'etre acceptés</li>
+		</ul>
+		<br/>
 
+		<p class="important">Si vous venez ingame, précisez bien que vous venez de tel forum. Evidemment, nous sommes un clan pas mal demandé. S'il y a pas de places dans le clan qui vous intéresse, nous vous notifierons. A noter que du ménage est souvent fait lundi ou mardi et que c'est à ce moment là qu'il y aura très surement de la place ;D</p>
+
+		<br/>
+		<p>En vous souhaitant de bons duels! Et j'espère à bientot! </p>
+		
 	</div>
 
 
