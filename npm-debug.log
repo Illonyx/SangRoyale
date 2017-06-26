@@ -7,8 +7,8 @@
 6 silly lifecycle MEAN-stack-authentication@0.0.1~prestart: no script for prestart, continuing
 7 info lifecycle MEAN-stack-authentication@0.0.1~start: MEAN-stack-authentication@0.0.1
 8 verbose lifecycle MEAN-stack-authentication@0.0.1~start: unsafe-perm in lifecycle true
-9 verbose lifecycle MEAN-stack-authentication@0.0.1~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/sky/Dev/MEAN-stack-authentication-master/node_modules/.bin:/home/sky/bin:/home/sky/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-10 verbose lifecycle MEAN-stack-authentication@0.0.1~start: CWD: /home/sky/Dev/MEAN-stack-authentication-master
+9 verbose lifecycle MEAN-stack-authentication@0.0.1~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/sky/Dev/sang-royale-repo/node_modules/.bin:/home/sky/bin:/home/sky/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle MEAN-stack-authentication@0.0.1~start: CWD: /home/sky/Dev/sang-royale-repo
 11 silly lifecycle MEAN-stack-authentication@0.0.1~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle MEAN-stack-authentication@0.0.1~start: Returned: code: 1  signal: null
 13 info lifecycle MEAN-stack-authentication@0.0.1~start: Failed to exec start script
@@ -23,8 +23,8 @@
 14 verbose stack     at maybeClose (internal/child_process.js:886:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid MEAN-stack-authentication@0.0.1
-16 verbose cwd /home/sky/Dev/MEAN-stack-authentication-master
-17 error Linux 4.8.0-45-generic
+16 verbose cwd /home/sky/Dev/sang-royale-repo
+17 error Linux 4.8.0-54-generic
 18 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
 19 error node v6.10.1
 20 error npm  v3.10.10
