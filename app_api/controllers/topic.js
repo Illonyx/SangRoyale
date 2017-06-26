@@ -5,7 +5,7 @@ module.exports.topic = function(req, res) {
 
   //Search in Database tournament data
   console.log("Here");
-  Topic.find({}, "lasteditiondate lastsaison tournoischallongeorganises linkderniertournoi linkchallongesangroyaletr discordmembers nombretrmaxSR topicLinkJV topicLinkCrFR urlBaseImageTops claninfo", 
+  Topic.find({}, "lasteditiondate generalinfo claninfo", 
     function(err, docs){console.log("Boum" + err);})
   .exec(function(err, result) {
         console.log("Result" + JSON.stringify(result));

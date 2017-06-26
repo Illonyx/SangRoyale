@@ -39,10 +39,19 @@
 	<div id="sr-topic-our-kingdom">
 		<p>Sang Royale est un clan fondé depuis déjà une bonne année. J'ai personnellement commencé à jouer très tôt (avant même sa sortie en France).Notre but initial était d'évoluer ensemble dans la convivialité et de monter jusqu'à l'arène légendaire tous ensemble mais aujourd'hui, nous n'avons plus qu'un objectif en tête!</p>
 		<p class="important">C'est celui de monter top 200 FR! Et nous n'en sommes pas loin !</p>
-		<p>En effet, cette saison, nous ne sommes qu'à 1000 points d'y aller dans ce top! Notre chef Maz a atteint les <span class="important">5490</span> points à la dernière saison et a été plusieurs fois dans le top FR. Dans le clan Sang Royale, <span class="important">42 membres sur les 50</span> ont déjà été à plus de <span class="important">4000</span> tr.</p>
+		<p>En effet, cette saison, nous ne sommes qu'à 1000 points d'y aller dans ce top! Notre chef Maz a atteint les <span class="important">{{vm.generalinfo.nombretrmaxSR}}</span> points à la dernière saison et a été plusieurs fois dans le top FR. Dans le clan Sang Royale, <span class="important">42 membres sur les 50</span> ont déjà été à plus de <span class="important">4000</span> tr.</p>
 		<p class="important">Seulement, il nous manque juste un petit quelque chose, et c'est votre talent ! #SangRoyaleSpirit</p>
 
 		<p>Nous nous sommes organisés en conséquence pour trouver la "nouvelle star" et en fonction des différents trophées de nos membres et du nombre croissant de demandes, nous avons crée 3 clans nommés (logiquement :D) Sang Royale, Sang Royale II et Sang Royale III</p>
+		<br/>
+
+		<div class="sr-clan-description" ng-repeat="clanElem in vm.claninfo track by clanElem.name">
+			<h4 class="important">{{clanElem.name}}</h4>
+			<p>{{clanElem.description}}</p>
+			<img width="313" height="223" src="{{vm.generalinfo.urlBaseImageTops}}{{clanElem.imageTop5}}" alt="Image Top 5 {{clanElem.name}}">
+			<figcaption>Top 5 {{clanElem.name}} saison {{vm.generalinfo.lastsaison}}</figcaption>
+			<br/>
+		</div>
 		<!--
 		<span ng-repeat="clanElem in vm.claninfo track by clanElem.name">
 			<p>Présentation de chaque clan individuelle à paramétrer</p>
@@ -89,19 +98,20 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 		mais nous sommes en train de refaire le système pour toujours plus de fun. Nous comptons introduire des tournois 2v2 ou des tournois à thème. 
 		Vous pouvez en savoir plus sur le site dans la section Tournois (reglement tournois, inscription, organisation)</p>
 		</p>
-		<!-- Tournois challonges organisés / Lien du dernier tournoi -->
-		<p>Nous sommes déjà à <strong>6 tournois d'organisés</strong> ! Nous avons l'intention de les reprendre cet été, et d'éventuellement <span class="important">rajouter des regles fun</span> :D</p>
-		<p><span class="important">Lien dernier challonge</span> : <a href=https://challonge.com/fr/SangRoyaleT6>Sang Royale T6</a></p>
+		
+		<p>Nous sommes déjà à <strong>{{vm.generalinfo.linkderniertournoi}} tournois d'organisés</strong> ! Nous avons l'intention de les reprendre cet été, et d'éventuellement <span class="important">rajouter des regles fun</span> :D</p>
+		<p><span class="important">Lien dernier challonge</span> : <a href="{{vm.generalinfo.linkderniertournoi}}">Lien vers le dernier tournoi/a></p>
 		<br/>
 		<!-- Mettre plutot le lien vers le compte Tournaments SR<!-->
 	</div>
+
 	<h3 class="centered">Notre table ronde - Discord (code : <span class="important">kgNDsht</span>)</h3>
 	<div id="sr-topic-challonge-communication">
 		<br/>
 		<p>Clash Royale étant basé sur la <span class="important">collaboration</span> et le <span class="important">partage</span>, notre volonté est de <span class="important">souder  des liens entre les membres et de créer une ambiance de clan unique</span></p>
 		<p>Nous avons mis en place <strong>Discord</strong>, une plateforme de communication cross-plateformes pour permettre une réelle <strong>cohésion</strong>! Nous avons notamment <strong>une salle de chat pour les 3 clans</strong> afin d'effacer les barrières entre les 3 clans. <br /><br /></p>
 		<!-- Discord Members -->
-		<p>Sur les membres des clans Sang Royale, <span class="important">{{vm.discordmembers}} personnes sont connectées à Discord</span>, ce qui nous permet d'avoir une vraie communauté et des échanges simples. Les joueurs les plus expérimentés viennent coacher les plus petits : <span class="important"> partage de decks ou coaching vocal</span> pendant des parties. C'est aussi très utile de communiquer lors de parties 2v2. </p>
+		<p>Sur les membres des clans Sang Royale, <span class="important">{{vm.generalinfo.discordmembers}} personnes sont connectées à Discord</span>, ce qui nous permet d'avoir une vraie communauté et des échanges simples. Les joueurs les plus expérimentés viennent coacher les plus petits : <span class="important"> partage de decks ou coaching vocal</span> pendant des parties. C'est aussi très utile de communiquer lors de parties 2v2. </p>
 		<br/>
 		<p>Discord n'est pas qu'une simple plateforme de communication. Nous avons installé des "bots" très utiles comme : </p>
 		<ul>
@@ -135,6 +145,9 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 	<br/>
 	</div>
 </div>
+
+
+
 <div id="sr-topic-candidates">
 	<h2 class="centered" id="sr-topic-candidates-title">Nous rejoindre</h2>
 	<br/>
@@ -181,8 +194,8 @@ Nous avons actuellement 27 membres. (3 devraient nous rejoindre)
 		<ul>
 			<!-- Donnée variable-->
 			<li>Vous pouvez venir sur Discord directement par le lien que je vous ai donné plus haut</li>
-			<li>Si vous avez un compte jeuxvideos.com : <a href="{{vm.topicLinkJV}}">ici</a></li>
-			<li>Si vous avez un compte sur ClashRoyalefr.fr : <a href="{{vm.topicLinkCrFR}}">ici</a></li>
+			<li>Si vous avez un compte jeuxvideos.com : <a href="{{vm.generalinfo.topicLinkJV}}">ici</a></li>
+			<li>Si vous avez un compte sur ClashRoyalefr.fr : <a href="{{vm.generalinfo.topicLinkCrFR}}">ici</a></li>
 			<li>Directement Sur le site (BIENTOT)</li>
 			<li>Ingame mais vous aurez moins de chance d'etre acceptés</li>
 		</ul>

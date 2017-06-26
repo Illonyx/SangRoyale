@@ -3,15 +3,17 @@ var Schema = mongoose.Schema;
 
 var topicSchema = new mongoose.Schema({
 	lasteditiondate : String,
-	lastsaison : String,
-	tournoischallongeorganises : String,
-	linkderniertournoi : String,
-	linkchallongesangroyaletr : String,
-	discordmembers : String,
-	nombretrmaxSR : String,
-	topicLinkJV : String,
-	topicLinkCrFR : String,
-	urlBaseImageTops : String,
+	generalinfo : {
+		lastsaison : String,
+		tournoischallongeorganises : String,
+		linkderniertournoi : String,
+		linkchallongesangroyaletr : String,
+		discordmembers : String,
+		nombretrmaxSR : String,
+		topicLinkJV : String,
+		topicLinkCrFR : String,
+		urlBaseImageTops : String
+	},
   	claninfo: [{
   	name : String,
   	id : String,
@@ -23,7 +25,7 @@ var topicSchema = new mongoose.Schema({
 	nombre4kFinSaison : String,
 	imageTop5 : String,
 	availablePlaces : String
-}]
+	}]
 });
 
 mongoose.model('Topic', topicSchema, "topic");
