@@ -50,3 +50,4 @@ process.on('SIGTERM', function() {
 require('./users');
 require('./tournamentdb');
 require('./topic');
+require('./tournamentcontext')
