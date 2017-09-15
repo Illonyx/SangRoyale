@@ -14,45 +14,6 @@
 </div>
 -->
 
-<style>
-
-.dropdown-user {
-    display: none;
-    position: fixed;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-user a:hover {background-color: #f1f1f1}
-
-.dropdown-user a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.connections:hover .dropdown-user 
-{
-    display: block;
-}
-
-img.userpicture
-{ 
-  width : 65px;
-  height : 65px;
-}
-/*
-input[readonly]{
-  background-color:transparent;
-  border: 0;
-  font-size: 1em;
-}*/
-</style>
-
 <!-- container-fluid is probably better for mobile -->
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
   
@@ -82,7 +43,6 @@ input[readonly]{
         <!-- <li class="active"><a href="#">Link</a></li> -->
 
         
-        
         <!-- Sang Royale dropdown-->
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">Sang Royale<span class="caret"></span></a>
@@ -106,13 +66,35 @@ input[readonly]{
         <!-- Tournaments dropdown -->
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">Tournois<span class="caret"></span></a>
+          <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+              <li><a href="tournamentsplanning">Planning</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Tournois à gemmes</a></li>
+              
+              <!-- Challonge tournaments submenu -->
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#">Tournois Challonge</a>
+                <ul class="dropdown-menu">
+                  <li><a href="tournaments#tr-general-info-title">Principe</a></li>
+                  <li><a href="tournaments#tr-challonge-organisation-title">Organisation</a></li>
+                  <li><a href="tournaments#tr-history">Historique</a></li>
+                </ul>
+              </li>
+            </ul>
+          <!-- 
           <ul class="dropdown-menu" role="menu">
-            <li><a href="tournaments#tr-general-info-title">Principe</a></li>
-            <li><a href="tournaments#tr-challonge-organisation-title">Organisation</a></li>
-            <li class="divider"></li>
-            <li><a href="tournaments#tr-history">Historique</a></li>
-            <li><a href="tournaments#tr-planning">Planning</a></li>
+            
+            
+            <li class="dropdown-submenu">
+            <ul class="dropdown-menu">
+            
+              
+            </ul>
+            </li>
+            
+            
           </ul>
+          -->
         </li>
 
       <!-- Other usecases dropdown -->
@@ -143,7 +125,7 @@ input[readonly]{
       <ul class="nav navbar-nav navbar-right">
         
         <!-- User actions when is logged out -->
-        <li ng-hide="navvm.isLoggedIn"><p class="navbar-text"><a href="login">Connection</a></p></li>
+        <li ng-hide="navvm.isLoggedIn"><p class="navbar-text"><a href="login">Connexion</a></p></li>
         <li ng-hide="navvm.isLoggedIn"><p class="navbar-text"><a href="register">S'inscrire</a></p></li>
 
         <!-- User actions when is logged in -->

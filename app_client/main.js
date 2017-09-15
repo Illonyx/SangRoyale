@@ -1,6 +1,6 @@
 (function () {
 
-  angular.module('sangRoyaleApp', ['ngRoute', 'ui.bootstrap']);
+  angular.module('sangRoyaleApp', ['ngRoute', 'ui.bootstrap', 'ui.calendar']);
 
   function config ($routeProvider, $locationProvider) {
     $routeProvider
@@ -32,6 +32,11 @@
       .when('/tournaments', {
         templateUrl: '/tournaments/tournaments.view.html',
         controller: 'tournamentsCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/tournamentsplanning', {
+        templateUrl: '/tournaments/tournaments-planning.view.html',
+        controller: 'calendarCtrl',
         controllerAs: 'vm'
       })
       .when('/loyalty', {
