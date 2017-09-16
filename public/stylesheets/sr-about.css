@@ -127,3 +127,44 @@ input[readonly]{
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
+
+
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'GameOfThrones';
+  src: url('GOT.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: white;
+}
+
+.time-to {
+  text-align: center;
+  font-family: 'GameOfThrones';
+  color: black;
+  font-size: 35px;
+  letter-spacing: 2px;
+}
+.time-to span {
+  display: block;
+  font-size: 80px;
+  color: red;
+}
