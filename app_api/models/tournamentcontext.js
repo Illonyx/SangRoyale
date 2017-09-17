@@ -3,13 +3,41 @@ var Schema = mongoose.Schema;
 
 var tournamentContextSchema = new mongoose.Schema({
 	
-	id : String,
-	generalinfo : Object,
-	current_round : Number,
-	doodles : [{
-		round : Number,
-		link : String
-	}]
+	name : String,
+    description : String,
+    date : String, 
+    reglement : String,
+    privacy : String,
+    organizer : String,
+    capacity : {type : Number, require : false},
+    tournamentGemProperty : {
+
+        type: {
+        	password : String, 
+        	gemnumber : Number
+        },
+        require : false
+
+    },
+    tournamentChallongeProperty : {
+    	
+    	type :  {
+    		code : String,
+        	url : String,
+        	type : String,
+        	eliminationMode : String,
+        	gamemode : String, 
+        	isFromLeague : String,
+        	rewards : Object,
+        	time : {
+				endRegisterDate : String,
+        		phase1Date : String
+        	}
+
+    	}, 
+    	require : false
+    }
+    
 	
 });
 
