@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var tournamentContextSchema = new mongoose.Schema({
 	
-	name : String,
+	id : String, 
+    name : String,
     description : String,
     date : String, 
     reglement : String,
