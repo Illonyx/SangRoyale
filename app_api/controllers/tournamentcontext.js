@@ -31,7 +31,7 @@ module.exports.tournamentcontext = function(req, res) {
 
   	if(reqBody.tournamentGemProperty){
   		var tournamentGemProperty = {}
-  		tournamentGemProperty.gemNumber=reqBody.tournamentGemProperty.gemNumber
+  		tournamentGemProperty.gemnumber=reqBody.tournamentGemProperty.gemnumber
   		tournamentGemProperty.password=reqBody.tournamentGemProperty.password
   		event.tournamentGemProperty=tournamentGemProperty
   	} else {
