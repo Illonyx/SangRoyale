@@ -3,6 +3,17 @@ var TournamentContext = mongoose.model('TournamentContext');
 
 module.exports.tournamentcontext = function(req, res) {
 
+if(req.params.id){
+  //Search in Database tournament data
+  console.log("here")
+  TournamentContext.find({"id":req.params.id}, 
+    function(err, docs){console.log("Boum" + err);})
+  .exec(function(err, result) {
+        console.log("Result" + JSON.stringify(result));
+        res.status(200).json(result);
+      });
+} else {
+
   //Search in Database tournament data
   TournamentContext.find({}, "id name description date reglement privacy organizer capacity tournamentGemProperty tournamentChallongeProperty", 
     function(err, docs){console.log("Boum" + err);})
@@ -10,6 +21,8 @@ module.exports.tournamentcontext = function(req, res) {
         console.log("Result" + JSON.stringify(result));
         res.status(200).json(result);
       });
+}
+
   };
 
 

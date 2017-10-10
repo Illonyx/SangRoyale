@@ -27,6 +27,7 @@ router.get('/about',ctrlAbout.topic);
 
 //TournamentContext
 router.get('/tournamentcontext', ctrlTournamentContext.tournamentcontext)
+router.get('/tournamentcontext/:id', ctrlTournamentContext.tournamentcontext)
 router.post('/tournamentcontext', ctrlTournamentContext.create_event);
 
 module.exports = router;
