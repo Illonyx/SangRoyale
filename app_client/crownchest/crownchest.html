@@ -1,6 +1,8 @@
 <navigation></navigation>
 
-	 
+	<div ng-show="vm.error">
+		<p style="color:red">ERREUR : Un problème est survenu lors de la récupération des données. </p>
+	</div> 
 	<div class="crChestContainer" ng-repeat="resultElem in vm.results | orderBy : resultElem.name">
     	<p>{{resultElem.name}}</p>
     	<div class="progress">

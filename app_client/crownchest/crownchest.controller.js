@@ -8,6 +8,7 @@
   function crownchestsCtrl(crapi) {
     var vm = this;
     vm.results=[]
+    vm.error=false
     vm.sangRoyaleFamily = ["CJQLP2", "2LUU0R0L", "8CPG2YU", "8GQL980P"]
 
     for(var i=0; i < vm.sangRoyaleFamily.length; i++){
@@ -18,11 +19,13 @@
         vm.results.sort(function(a,b){
           return b.result - a.result
         })
-        //vm.crownChestValues[clanId]
 
       })
       .error(function(error){
-        console.log(error);
+        console.log("Error" + error)
+        if(error){
+          vm.error=true
+        }
       })
 
 
