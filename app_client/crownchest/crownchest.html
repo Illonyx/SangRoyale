@@ -1,0 +1,18 @@
+<navigation></navigation>
+
+	 
+	<div class="crChestContainer" ng-repeat="resultElem in vm.results | orderBy : resultElem.name">
+    	<p>{{resultElem.name}}</p>
+    	<div class="progress">
+ 		 <div class="progress-bar" role="progressbar" aria-valuenow="{{resultElem.percent}}"
+ 		 aria-valuemin="0" aria-valuemax="100" style="width:{{resultElem.percent}}%">
+    	{{resultElem.result}}
+  		</div>
+	</div> 
+  	</div>
+
+<!--
+	 
+	-->
+	
+

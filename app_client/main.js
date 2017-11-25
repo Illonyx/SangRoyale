@@ -53,6 +53,11 @@
       .when('/other/updatelog', {
         templateUrl: '/other/other.update-app-log.view.html'
       })
+      .when('/crownchest', {
+        templateUrl : '/crownchest/crownchest.html', 
+        controller: 'crownchestsCtrl', 
+        controllerAs : 'vm'
+      })
       .otherwise({redirectTo: '/'});
 
     // use the HTML5 History API
