@@ -25,6 +25,7 @@ router.get('/tournaments', ctrlTournaments.tournaments);
 
 //CrApi
 router.get('/crownchests/:id', ctrlCrApi.clanchest)
+router.get('/membersClanChestCrowns/:id', ctrlCrApi.membersClanChestCrowns)
 
 //About
 router.get('/about',ctrlAbout.topic);

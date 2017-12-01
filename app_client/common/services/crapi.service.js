@@ -11,8 +11,12 @@
       return $http.get('/api/crownchests/' + clanId);
     };
 
+    var getMembersClanChestCrowns = function(clanId){
+      return $http.get('api/membersClanChestCrowns/' + clanId);
+    }
+
     return {
-      getClanChestForClan : getClanChestForClan
+      getClanChestForClan : getClanChestForClan, getMembersClanChestCrowns: getMembersClanChestCrowns
     };
   }
 
