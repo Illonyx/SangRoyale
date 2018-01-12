@@ -1,42 +1,54 @@
 <navigation></navigation>
 
-	<div ng-show="vm.error">
-		<p style="color:red">ERREUR : Un problème est survenu lors de la récupération des données. </p>
-	</div> 
-	<div class="crChestContainer" ng-repeat="resultElem in vm.results | orderBy : resultElem.name">
-    	<p>{{resultElem.name}}</p>
-    	<div class="progress">
- 		 <div class="progress-bar" role="progressbar" aria-valuenow="{{resultElem.percent}}"
- 		 aria-valuemin="0" aria-valuemax="100" style="width:{{resultElem.percent}}%">
-    	{{resultElem.result}}
-  		</div>
-	</div> 
-  	</div>
-  	<div id="best-contributers">
-  		<h1>Les 5 meilleurs contributeurs de toute la famille Sang Royale cette semaine</h1>
-  		<!-- returnTopMembersCrownChests -->
-  		<table class="table table-responsive">
-  		<thead class="thead-light">
-  		<tr>
-  			<th scope="col">Rang</th>
-  			<th scope="col">Pseudo</th>
-  			<th scope="col">Clan</th>
-  			<th scope="col">Nombre de couronnes</th>
-  		</tr>
-  		<tbody>
-  			<tr class="membersClanChestLine" ng-repeat="resultElem in vm.topchest | orderBy : resultElem.clanChestCrowns" ng-class="{'bg-primary': $index === 0, 'bg-success': $index===1, 'bg-warning' : $index === 2}">
-  				
-	  			<th scope="row">{{$index + 1}}</th>
-	  			<td><p>{{resultElem.name}}</p></td>
-	  			<td><p>{{resultElem.clanName}}</p></td>
-	  			<td><p>{{resultElem.clanChestCrowns}}</p></td>
-  			</tr>
-  		</tbody>
-  		</table>
-  	</div>
+<div ng-show="vm.error">
+  <p style="color:red">ERREUR : Un problème est survenu lors de la récupération des données. </p>
+</div> 
+<div class="crChestContainer" ng-repeat="resultElem in vm.results | orderBy : resultElem.name">
+<div id="clanProgress" ng-hide="{{resultElem.status == 'inactive'}}">
+   <p>{{resultElem.name}}</p>
+   <div class="progress">
+     <div class="progress-bar" role="progressbar" aria-valuenow="{{resultElem.percent}}"
+     aria-valuemin="0" aria-valuemax="100" style="width:{{resultElem.percent}}%">
+     {{resultElem.result}}
+   </div>
+
+ </div>
+
+</div> 
+</div>
+<div id="best-contributers">
+  <h1>Les 5 meilleurs contributeurs de toute la famille Sang Royale cette semaine</h1>
+  <!-- returnTopMembersCrownChests -->
+  <table class="table table-responsive">
+    <thead class="thead-light">
+      <tr>
+       <th scope="col">Rang</th>
+       <th scope="col">Pseudo</th>
+       <th scope="col">Clan</th>
+       <th scope="col">Nombre de couronnes</th>
+     </tr>
+     <tbody>
+       <tr class="membersClanChestLine" ng-repeat="resultElem in vm.topchest | orderBy : resultElem.clanChestCrowns" ng-class="{'bg-primary': $index === 0, 'bg-success': $index===1, 'bg-warning' : $index === 2}">
+
+        <th scope="row">{{$index + 1}}</th>
+        <td><p>{{resultElem.name}}</p></td>
+        <td><p>{{resultElem.clanName}}</p></td>
+        <td><p>{{resultElem.clanChestCrowns}}</p></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>Export des données pour les cdc</h1>
+  <div id="download-cdc">
+   <select ng-model="vm.selectedClan" ng-options="clan.name for clan in vm.sangRoyaleFamily"></select>
+   <button ng-click="vm.go()">Télécharger</button>
+
+ </div>
+
+</div>
 
 <!--
 	 
-	-->
-	
+-->
+
 

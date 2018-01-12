@@ -1,5 +1,30 @@
-const cr = require('cr.js');
-let client = new cr.Client();
+const request = require('request-promise')
+const crApiSecretKey = process.env.CR_API_SECRET_KEY
+
+
+/*
+-- Gettlers (Network)
+*/
+
+var get = function(extension){
+  console.log('uri' + extension)
+  var options = {
+    'method' : 'GET',
+    'uri': 'http://api.cr-api.com/' + extension, 
+    'headers': { 
+      'User-Agent' : 'Sang Royale Website',
+      'auth': crApiSecretKey
+    },
+    'json' : true 
+  };
+  //console.log('uri' + uri)
+  return request(options)
+}
+
+
+var getClan = function(clanId){
+  return get('clan/' + clanId)
+}
 
 module.exports.clanchest = function(req, res) {
 
@@ -7,15 +32,17 @@ module.exports.clanchest = function(req, res) {
 
   var clanId = req.params.id
   console.log("Processing with clanId : " + clanId)
-  client.getClan(clanId).then(function(data){
+  getClan(clanId).then(function(data){
   	console.log("Data" + JSON.stringify(data))
   	var name = data.name;
   	var result = data.clanChest.crowns;
   	var percent = data.clanChest.percent;
-  	res.status(200).json({"name":name,"result":Number(result),"percent":percent});
+    var status = data.clanChest.status;
+  	res.status(200).json({"name":name,"result":Number(result),"percent":percent, "status":status});
 
   }).catch(function(error){
-  	res.status(500).send("Probleme de récupéation des données")
+    console.log('What' + error)
+  	res.status(500).send("Probleme de récupération des données")
   });
   	
  }
@@ -26,7 +53,7 @@ module.exports.membersClanChestCrowns = function(req, res) {
 
   var clanId = req.params.id
   console.log("Processing with clanId : " + clanId)
-  client.getClan(clanId).then(function(data){
+  getClan(clanId).then(function(data){
   	console.log("Data" + JSON.stringify(data))
   	var name=data.name;
   	var members=data.members;
@@ -44,3 +71,10 @@ module.exports.membersClanChestCrowns = function(req, res) {
   });
   	
  }
+
+module.exports.clanChestCrowns = function(clanId){
+  return getClan(clanId)
+}
+
+
+

@@ -8,7 +8,7 @@
   function crapi($http) {
 
     var getClanChestForClan = function (clanId) {
-      return $http.get('/api/crownchests/' + clanId);
+      return $http.get('api/crownchests/' + clanId);
     };
 
     var getMembersClanChestCrowns = function(clanId){

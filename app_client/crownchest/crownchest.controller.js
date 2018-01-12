@@ -4,23 +4,32 @@
   .module('sangRoyaleApp')
   .controller('crownchestsCtrl', crownchestsCtrl);
 
-  crownchestsCtrl.$inject = ['crapi']
+  crownchestsCtrl.$inject = ['crapi', '$window']
 
-
-
-  function crownchestsCtrl(crapi) {
+  function crownchestsCtrl(crapi, $window) {
     var vm = this;
     vm.NB_TOP=5
     vm.results=[]
     vm.memberResults=[]
     vm.error=false
-    vm.sangRoyaleFamily = ["CJQLP2", "2LUU0R0L", "8CPG2YU", "8GQL980P"]
+    vm.sangRoyaleFamily = [
+    {"name":"Sang Royale", "id":"CJQLP2"}, 
+    {"name":"Sang Royale II", "id":"2LUU0R0L"}, 
+    {"name":"Sang Royale III", "id":"8CPG2YU"}, 
+    {"name":"Sang Royale IV", "id":"8GQL980P"}]
     vm.topchest = []
+    vm.selectedClan={}
+    vm.go = function(){
+      if(vm.selectedClan["id"]){
+         $window.open('/api/download/' + vm.selectedClan["id"])
+      }
+    }
 
 
     for(var i=0; i < vm.sangRoyaleFamily.length; i++){
 
-      crapi.getClanChestForClan(vm.sangRoyaleFamily[i])
+      //MARCHE PLUS?
+      crapi.getClanChestForClan(vm.sangRoyaleFamily[i].id)
       .success(function(data){
         vm.results.push(data)
         vm.results.sort(function(a,b){
@@ -35,9 +44,8 @@
         }
       })
 
-      crapi.getMembersClanChestCrowns(vm.sangRoyaleFamily[i])
+      crapi.getMembersClanChestCrowns(vm.sangRoyaleFamily[i].id)
       .success(function(data){
-        console.log("ddfz")
         vm.memberResults.push(data)
         if(vm.memberResults.length == vm.sangRoyaleFamily.length){
           vm.topchest = returnTopMembersCrownChests()
@@ -72,6 +80,8 @@
       return allFamilyMembers.slice(0, vm.NB_TOP)
 
     };
+
+    
 
     
   }

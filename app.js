@@ -13,6 +13,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // [SH] Require Passport
 var passport = require('passport');
+var json2xls = require('json2xls');
 
 // [SH] Bring in the data model
 require('./app_api/models/db');
@@ -51,6 +52,9 @@ app.use('/api', routesApi);
 app.use(function(req, res) {
   res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
 });
+
+//
+app.use(json2xls.middleware)
 
 
 // catch 404 and forward to error handler

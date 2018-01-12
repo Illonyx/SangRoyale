@@ -2,7 +2,7 @@
 
   angular.module('sangRoyaleApp', ['ngRoute', 'ui.bootstrap', 'ui.calendar']);
 
-  function config ($routeProvider, $locationProvider) {
+  function config ($routeProvider, $locationProvider, $windowProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'home/home.view.html',
@@ -62,6 +62,9 @@
 
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
+
+    //Allow new window opening
+    var $window = $windowProvider.$get();
   }
 
   function run($rootScope, $location, authentication) {
@@ -74,7 +77,7 @@
   
   angular
     .module('sangRoyaleApp')
-    .config(['$routeProvider', '$locationProvider', config])
+    .config(['$routeProvider', '$locationProvider', '$windowProvider', config])
     .run(['$rootScope', '$location', 'authentication', run]);
 
 })();
