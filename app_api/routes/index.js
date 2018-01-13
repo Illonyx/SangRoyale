@@ -51,7 +51,7 @@ router.get('/download/:id', function(req,res) {
 	    var name=data.name;
 	    var members=data.members;
 	    var membersA = members.map(function(member){
-	      return {"name":member.name, "clanChestCrowns":Number(member.clanChestCrowns), "roleName": member.roleName}
+	      return {"name":member.name, "clanChestCrowns":Number(member.clanChestCrowns), "roleName": member.role}
 	    })
 	    membersA.sort(function(a,b){
 	      return a.clanChestCrowns - b.clanChestCrowns
