@@ -26,6 +26,10 @@ var getClan = function(clanId){
   return get('clan/' + clanId)
 }
 
+var getPlayer = function(playerId){
+  return get("player/" + playerId)
+}
+
 module.exports.clanchest = function(req, res) {
 
   //Download the necessary data using cr.js client
@@ -74,6 +78,17 @@ module.exports.membersClanChestCrowns = function(req, res) {
 
 module.exports.clanChestCrowns = function(clanId){
   return getClan(clanId)
+}
+
+module.exports.playersStats = function(playerIds){
+  var playersInUrl = ""
+  for(var i=0;i<playerIds.length;i++){
+    if(i>0){
+      playersInUrl += ","
+    }
+    playersInUrl += playerIds[i]
+  }
+  return getPlayer(playersInUrl)
 }
 
 

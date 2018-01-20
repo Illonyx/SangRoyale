@@ -19,9 +19,15 @@
     {"name":"Sang Royale IV", "id":"8GQL980P"}]
     vm.topchest = []
     vm.selectedClan={}
-    vm.go = function(){
+    vm.downloadActivity = function(){
       if(vm.selectedClan["id"]){
          $window.open('/api/download/activity/' + vm.selectedClan["id"])
+      }
+    }
+
+    vm.downloadTrophy = function(){
+      if(vm.selectedClan["id"]){
+         $window.open('/api/download/trophy/' + vm.selectedClan["id"])
       }
     }
 

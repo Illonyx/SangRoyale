@@ -39,12 +39,12 @@ router.get('/tournamentcontext', ctrlTournamentContext.tournamentcontext)
 router.get('/tournamentcontext/:id', ctrlTournamentContext.tournamentcontext)
 router.post('/tournamentcontext', ctrlTournamentContext.create_event);
 
+//Export
 router.get('/download/activity/:id', ctrlExport.downloadActivityReport); 
+router.get('/download/trophy/:id', ctrlExport.downloadTrophyReport); 
 
 
 	
-	
-	
-	//res.download(__dirname + '/images/banniereCSnoir.png')
+
 
 module.exports = router;

@@ -16,6 +16,18 @@ var findClanAcronym = function(clanName){
 	return acronym.toLowerCase()
 }
 
+var exportExcel = function(xls, fileName, res){
+	var appDir = path.dirname(require.main.filename);
+	var filePath = path.join(appDir, 'test', 'jsonTesta.xls')
+	fs.writeFile(filePath, xls, "binary", function(err) {
+		if(err) {
+    		return console.log(err);
+		}
+		console.log("The file was saved!");
+		res.download(filePath, fileName)
+	});
+}
+
 module.exports.downloadActivityReport = function(req,res) {
 	var nameRequested=req.params.id
 	var clanAcronym=""
@@ -37,20 +49,43 @@ module.exports.downloadActivityReport = function(req,res) {
 
 	    console.log("?")
 		var xls = json2xls(membersA)
-
-		var appDir = path.dirname(require.main.filename);
-		var filePath = path.join(appDir, 'test', 'jsonTesta.xls')
-		fs.writeFile(filePath, xls, "binary", function(err) {
-			if(err) {
-	    		return console.log(err);
-			}
-			console.log("The file was saved!");
-			res.download(filePath, clanAcronym + "-activity.xls")
-		});
+		exportExcel(xls, clanAcronym + "-activity.xls", res)
 
 	})
 	.catch(function(error){
     	console.log("Error" + error)
   	});
    
+}
+
+module.exports.downloadTrophyReport = function(req,res){
+	var nameRequested=req.params.id
+	var clanAcronym=""
+	console.log("Aqui?")
+	ctrlCrApi.clanChestCrowns(nameRequested)
+	.then(function(data){
+		clanAcronym=findClanAcronym(data.name);
+		var members=data.members
+		var memberTags = members.map(function(member){
+			return member.tag
+		})
+		console.log("Fin de traitement")
+		return ctrlCrApi.playersStats(memberTags)
+	}).then(function(playerdata){
+		
+		var playerDataMapped = playerdata.map(function(player){
+			return {"name": player.name, "tag": player.tag, "trophies" : player.trophies, "record" : player.stats.maxTrophies, 
+				 "previousSeason" : (player.leagueStatistics) ? (player.leagueStatistics.previousSeason) ? player.leagueStatistics.previousSeason.bestTrophies : "" : "", "challengeCardsWon" : player.stats.challengeCardsWon}
+		})
+		playerDataMapped.sort(function(a,b){
+			if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+     		else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+      		return 0;
+		})
+		var xls = json2xls(playerDataMapped)
+		exportExcel(xls, clanAcronym + "-trophy.xls", res)
+
+	}).catch(function(error){
+    	console.log("Error" + error)
+  	});
 }
