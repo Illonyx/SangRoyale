@@ -21,7 +21,7 @@
     vm.selectedClan={}
     vm.go = function(){
       if(vm.selectedClan["id"]){
-         $window.open('/api/download/' + vm.selectedClan["id"])
+         $window.open('/api/download/activity/' + vm.selectedClan["id"])
       }
     }
 
