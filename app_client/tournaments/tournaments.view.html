@@ -106,9 +106,9 @@
 <h2 id="tr-history">Historique</h2>
 <div id="tournamentsContainer">
   
-  <div class="tournamentContainer" ng-repeat="tournamentElem in vm.tournaments track by tournamentElem.tournament.name">
-    <h3><a href="{{tournamentElem.tournament.full_challonge_url}}">{{tournamentElem.tournament.name}}</a></h3>
-    <i>Tournoi de type {{tournamentElem.tournament.tournament_type}} - {{tournamentElem.tournament.participants_count}}</i>
+  <div class="tournamentContainer" ng-repeat="tournamentElem in vm.tournaments track by tournamentElem.name">
+    <h3><a href="{{tournamentElem.full_challonge_url}}">{{tournamentElem.name}}</a></h3>
+    <i>Tournoi de type {{tournamentElem.tournament_type}} - {{tournamentElem.participants_count}}</i>
     <br/>
   </div>
 </div>
