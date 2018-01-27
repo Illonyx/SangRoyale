@@ -1,0 +1,11 @@
+<navigation></navigation>
+
+<h1>Export des données pour l'activité des joueurs (cdc + dons)</h1>
+  <div id="download-activity">
+   <select ng-model="vm.selectedClan" ng-options="clan.name for clan in vm.sangRoyaleFamily"></select>
+   <button ng-click="vm.downloadActivity()">Télécharger</button>
+
+   <h1>Export des données pour les performances des joueurs (record + saison) </h1>
+  <div id="download-trophy">
+   <select ng-model="vm.selectedClan2" ng-options="clan.name for clan in vm.sangRoyaleFamily"></select>
+   <button ng-click="vm.downloadTrophy()">Télécharger</button>

@@ -17,8 +17,10 @@ var findClanAcronym = function(clanName){
 }
 
 var exportExcel = function(xls, fileName, res){
+	console.log('What')
 	var appDir = path.dirname(require.main.filename);
 	var filePath = path.join(appDir, 'test', 'jsonTesta.xls')
+	console.log(filePath)
 	fs.writeFile(filePath, xls, "binary", function(err) {
 		if(err) {
     		return console.log(err);
@@ -31,6 +33,7 @@ var exportExcel = function(xls, fileName, res){
 module.exports.downloadActivityReport = function(req,res) {
 	var nameRequested=req.params.id
 	var clanAcronym=""
+	console.log('?')
 	var jsonResult = ctrlCrApi.clanChestCrowns(nameRequested)
 	.then(function(data){
 	    console.log("Data" + JSON.stringify(data))
@@ -47,7 +50,6 @@ module.exports.downloadActivityReport = function(req,res) {
       	  return 0;
 	    })
 
-	    console.log("?")
 		var xls = json2xls(membersA)
 		exportExcel(xls, clanAcronym + "-activity.xls", res)
 

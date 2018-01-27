@@ -4,9 +4,9 @@
   .module('sangRoyaleApp')
   .controller('crownchestsCtrl', crownchestsCtrl);
 
-  crownchestsCtrl.$inject = ['crapi', '$window']
+  crownchestsCtrl.$inject = ['crapi']
 
-  function crownchestsCtrl(crapi, $window) {
+  function crownchestsCtrl(crapi) {
     var vm = this;
     vm.NB_TOP=5
     vm.results=[]
@@ -18,20 +18,7 @@
     {"name":"Sang Royale III", "id":"8CPG2YU"}, 
     {"name":"Sang Royale IV", "id":"8GQL980P"}]
     vm.topchest = []
-    vm.selectedClan={}
-    vm.downloadActivity = function(){
-      if(vm.selectedClan["id"]){
-         $window.open('/api/download/activity/' + vm.selectedClan["id"])
-      }
-    }
-
-    vm.downloadTrophy = function(){
-      if(vm.selectedClan["id"]){
-         $window.open('/api/download/trophy/' + vm.selectedClan["id"])
-      }
-    }
-
-
+    
     for(var i=0; i < vm.sangRoyaleFamily.length; i++){
 
       crapi.getMembersClanChestCrowns(vm.sangRoyaleFamily[i].id)

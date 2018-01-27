@@ -58,6 +58,11 @@
         controller: 'crownchestsCtrl', 
         controllerAs : 'vm'
       })
+      .when('/export', {
+        templateUrl : '/export/export.html', 
+        controller: 'exportsCtrl', 
+        controllerAs : 'vm'
+      })
       .when('/events', {
         templateUrl : '/events/events.html', 
         controller: 'eventsCtrl', 
