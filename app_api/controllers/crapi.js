@@ -30,27 +30,6 @@ var getPlayer = function(playerId){
   return get("player/" + playerId)
 }
 
-module.exports.clanchest = function(req, res) {
-
-  //Download the necessary data using cr.js client
-
-  var clanId = req.params.id
-  console.log("Processing with clanId : " + clanId)
-  getClan(clanId).then(function(data){
-  	console.log("Data" + JSON.stringify(data))
-  	var name = data.name;
-  	var result = data.clanChest.crowns;
-  	var percent = data.clanChest.percent;
-    var status = data.clanChest.status;
-  	res.status(200).json({"name":name,"result":Number(result),"percent":percent, "status":status});
-
-  }).catch(function(error){
-    console.log('What' + error)
-  	res.status(500).send("Probleme de récupération des données")
-  });
-  	
- }
-
 module.exports.membersClanChestCrowns = function(req, res) {
 
   //Download the necessary data using cr.js client
@@ -62,7 +41,7 @@ module.exports.membersClanChestCrowns = function(req, res) {
   	var name=data.name;
   	var members=data.members;
   	var members = members.map(function(member){
-  		return {"name":member.name, "clanChestCrowns":Number(member.clanChestCrowns), "roleName": member.roleName}
+  		return {"name":member.name, "clanChestCrowns":Number(member.clanChestCrowns)}
   	})
   	members.sort(function(a,b){
   		return a.clanChestCrowns - b.clanChestCrowns
@@ -71,14 +50,10 @@ module.exports.membersClanChestCrowns = function(req, res) {
   	res.status(200).json({"name":name,"members":members});
 
   }).catch(function(error){
-  	res.status(500).send("Probleme de récupéation des données")
+  	res.status(500).send("Probleme de récupération des données")
   });
   	
  }
-
-module.exports.clanChestCrowns = function(clanId){
-  return getClan(clanId)
-}
 
 module.exports.playersStats = function(playerIds){
   var playersInUrl = ""

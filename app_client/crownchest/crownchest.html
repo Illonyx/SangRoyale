@@ -3,8 +3,9 @@
 <div ng-show="vm.error">
   <p style="color:red">ERREUR : Un problème est survenu lors de la récupération des données. </p>
 </div> 
+<p>(Il peut y avoir une erreur sur le calcul du nombre total de couronnes : les membres partant potentiellement du clan la semaine étant non comptés)</p>
 <div class="crChestContainer" ng-repeat="resultElem in vm.results | orderBy : resultElem.name">
-<div id="clanProgress" ng-hide="{{resultElem.status == 'inactive'}}">
+<div id="clanProgress">
    <p>{{resultElem.name}}</p>
    <div class="progress">
      <div class="progress-bar" role="progressbar" aria-valuenow="{{resultElem.percent}}"

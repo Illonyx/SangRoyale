@@ -34,27 +34,27 @@
 
     for(var i=0; i < vm.sangRoyaleFamily.length; i++){
 
-      //MARCHE PLUS?
-      crapi.getClanChestForClan(vm.sangRoyaleFamily[i].id)
-      .success(function(data){
-        vm.results.push(data)
-        vm.results.sort(function(a,b){
-          return b.result - a.result
-        })
-
-      })
-      .error(function(error){
-        console.log("Error" + error)
-        if(error){
-          vm.error=true
-        }
-      })
-
       crapi.getMembersClanChestCrowns(vm.sangRoyaleFamily[i].id)
       .success(function(data){
+
+        /* Calcul de l'état du CDC total du clan */
+        var allCrownchestValues = data.members.map(function(memberResult){
+          return memberResult.clanChestCrowns
+        })
+        var allCumulatedCrowns = allCrownchestValues.reduce(function(accumulateur, currentValue, index, array){
+          return accumulateur + currentValue
+        })
+        var percentage = allCumulatedCrowns/1600*100
+        vm.results.push({name : data.name, result : allCumulatedCrowns, percent : percentage})
+
+        
+        /* Calcul du top 5 du clan :) */
         vm.memberResults.push(data)
         if(vm.memberResults.length == vm.sangRoyaleFamily.length){
           vm.topchest = returnTopMembersCrownChests()
+          vm.results.sort(function(a,b){
+            return b.result-a.result
+          })
         }
       })
       .error(function(error){
