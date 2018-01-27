@@ -1,34 +1,41 @@
-var mongoose = require('mongoose');
-var Tournament = mongoose.model('Tournament');
+const challonge = require('challonge')
+const client = challonge.createClient({
+  apiKey: process.env.CHALLONGE_USER_TOKEN
+});
 
-var sendJSONresponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
-};
+//Faut bien convertir ce format tout pourri avant de faire autre chose :D
+var convert = function(challongeJson, objectKey){
+  var array = []
+  for(var i=0;i<Object.keys(challongeJson).length;i++){
+    var tournamentJson = challongeJson["" + i][objectKey]
+    if(tournamentJson)
+      array.push(tournamentJson)
+  }
+  console.log('First elem : ' + JSON.stringify(array[0]))
+  return array
+}
 
-var filterObjectTableWithKeys = function(tabContent, objCategory, objectKeysToConsider){
-    return tabContent.map(function(object){
+module.exports.tournaments = function(req, res){
+  client.tournaments.index({
+    callback: (err, data) => {
+    //console.log(err, data);
+    //Converts data object in a readable arraylist
+    var array = convert(data, "tournament")
+    var arrayM = array.map(function(tournament){
+      return {
+        name : tournament.name,
+        url : tournament.url,
+        full_challonge_url : tournament.fullChallongeUrl,
+        tournament_type : tournament.tournamentType,
+        participants_count : tournament.participantsCount
+      }
+    })
+    console.log('Array' + JSON.stringify(arrayM))
+    res.status(200).json(arrayM);
+    }
+});
 
-      var revivedObject = object[objCategory];
-      var newObj = {};
-        objectKeysToConsider.map(function(keyToConsider){
-          newObj[keyToConsider] = revivedObject[keyToConsider];
-      });
-        return newObj;
-    });
-  };
-
-module.exports.tournaments = function(req, res) {
-
-  //Search in Database tournament data
-  console.log("Here");
-  Tournament.find({}, "tournament.name tournament.url tournament.full_challonge_url tournament.tournament_type tournament.participants_count", 
-    function(err, docs){console.log("Boum" + err);})
-  .exec(function(err, result) {
-        console.log("Result" + JSON.stringify(result));
-        res.status(200).json(result);
-      });
-  };
+}
   
 /*
   challongeResults = filterObjectTableWithKeys(challongeResults, "tournament", ["id", "name", "url", "tournament_type", "completed_at", "full_challonge_url", "participants_count"]);

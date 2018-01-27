@@ -12,7 +12,6 @@ var auth = jwt({
 var ctrlProfile = require('../controllers/profile');
 var ctrlAuth = require('../controllers/authentication');
 var ctrlTournaments = require('../controllers/tournaments');
-var ctrlTournamentsNew = require('../controllers/tournaments-new');
 var ctrlAbout = require('../controllers/topic');
 var ctrlTournamentContext = require('../controllers/tournamentcontext');
 var ctrlExport = require("../controllers/export")
@@ -26,10 +25,7 @@ router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 //Tournaments
-router.get('/tournaments', ctrlTournamentsNew.tournaments);
-
-
-router.get('/tournamentsnew', ctrlTournamentsNew.tournaments)
+router.get('/tournaments', ctrlTournaments.tournaments);
 
 //CrApi
 router.get('/crownchests/:id', ctrlCrApi.clanchest)
