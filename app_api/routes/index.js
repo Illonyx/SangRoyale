@@ -38,6 +38,7 @@ router.get('/about',ctrlAbout.topic);
 router.get('/tournamentcontext', ctrlTournamentContext.tournamentcontext)
 router.get('/tournamentcontext/:id', ctrlTournamentContext.tournamentcontext)
 router.post('/tournamentcontext', ctrlTournamentContext.create_event);
+router.delete('/tournamentcontext/:id', ctrlTournamentContext.delete_event);
 
 //Export
 router.get('/download/activity/:id', ctrlExport.downloadActivityReport); 

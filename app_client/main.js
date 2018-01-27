@@ -58,6 +58,16 @@
         controller: 'crownchestsCtrl', 
         controllerAs : 'vm'
       })
+      .when('/events', {
+        templateUrl : '/events/events.html', 
+        controller: 'eventsCtrl', 
+        controllerAs : 'vm'
+      })
+      .when('/events/new', {
+        templateUrl : '/events/event-add.html', 
+        controller: 'eventAddCtrl', 
+        controllerAs : 'vm'
+      })
       .otherwise({redirectTo: '/'});
 
     // use the HTML5 History API

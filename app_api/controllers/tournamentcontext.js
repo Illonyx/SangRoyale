@@ -57,5 +57,15 @@ if(req.params.id){
 
   };
 
+  module.exports.delete_event = function(req, res){
+    TournamentContext.findByIdAndRemove(req.params.id, (err, todo) => {
+       var response = {
+        message: "Todo successfully deleted",
+        id: todo.id
+    };
+    res.status(200).send(response);
+    })
+  };
+
 
   
