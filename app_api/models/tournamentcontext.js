@@ -11,49 +11,11 @@ var tournamentContextSchema = new mongoose.Schema({
     privacy : String,
     organizer : String,
     capacity : {type : Number, require : false},
-    tournamentGemProperty : {
-
-        type: {
-        	password : String, 
-        	gemnumber : Number
-        },
-        require : false
-
-    },
-    tournamentChallongeProperty : {
-    	
-    	type :  {
-    		code : String,
-        	url : String,
-        	type : String,
-        	eliminationMode : String,
-        	gamemode : String, 
-        	isFromLeague : String,
-        	rewards : Object,
-        	time : {
-				endRegisterDate : String,
-        		phase1Date : String
-        	}
-
-    	}, 
-    	require : false
-    }
+    kind : String, 
+    league : {type : String, require : false},
+    properties : Object
     
 	
 });
-
-/*
-
-{
-		challongeurl : String,
-  		gamemode : String,
-  		rules : String,
-  		type : String,
-		restrictions : String,
-		recompenses : String,
-		tournamentmanagers : String,
-		ruleswebsite : String
-	}
-*/
 
 mongoose.model('TournamentContext', tournamentContextSchema, "tournamentContext");

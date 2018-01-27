@@ -8,8 +8,44 @@
   function eventAddCtrl($location, events) {
     var vm = this;
 
+    /*
+
+
+tournamentGemProperty : {
+
+        type: {
+          password : String, 
+          gemnumber : Number
+        },
+        require : false
+
+    },
+    tournamentChallongeProperty : {
+      
+      type :  {
+        code : String,
+          url : String,
+          type : String,
+          eliminationMode : String,
+          gamemode : String, 
+          isFromLeague : String,
+          rewards : Object,
+          time : {
+        endRegisterDate : String,
+            phase1Date : String
+          }
+
+      }, 
+      require : false
+    }
+
+
+
+    */
+
     vm.privacies=["private", "public"]
     vm.gemnumbers=[100,500,2000,10000]
+    vm.kinds = ["Gem Tournament", "Bracket Tournament", "Clan War"]
 
     vm.event = {
       tournamentGemProperty: {
@@ -25,7 +61,8 @@
       name: "",
       id: "TR792017142746",
       kind : "Gem Tournament",
-      properties : {}
+      properties : {}, 
+      league : ''
     }
 
     vm.onSubmit = function(){

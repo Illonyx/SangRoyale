@@ -33,16 +33,36 @@
           <label for="description">Description</label>
           <input type="textarea" class="form-control" id="description" placeholder="Entrer une petite description de l'évènement" ng-model="vm.event.description">
         </div>
-        <h2>Pour un tournoi à gemmes</h2>
         <div class="form-group">
-          <label for="gemnumber">Nombre de gemmes du tournoi</label>
-           <select id="gemnumber" ng-model="vm.event.tournamentGemProperty.gemnumber" ng-options="gem for gem in vm.gemnumbers"></select>
-        </div>
-        <div class="form-group">
-          <label for="password">Mot de passe à mettre</label>
-          <input type="text" class="form-control" id="password" placeholder="" ng-model="vm.event.tournamentGemProperty.password">
+          <label for="privacy">Type de l'évènement : </label>
+          <select id="privacy" ng-model="vm.event.kind" ng-options="kind for kind in vm.kinds"></select>
         </div>
 
+        <div ng-switch="vm.event.kind">
+          
+        <!-- Champs spécifiques pour les tournois à gemmes-->
+          <div class="gem-tournament-fields" ng-switch-when="Gem Tournament">
+            <div class="form-group">
+              <label for="gemnumber">Nombre de gemmes du tournoi</label>
+              <select id="gemnumber" ng-model="vm.event.properties.gemnumber" ng-options="gem for gem in vm.gemnumbers"></select>
+            </div>
+            <div class="form-group">
+              <label for="password">Mot de passe à mettre</label>
+               <input type="text" class="form-control" id="password" placeholder="" ng-model="vm.event.properties.password">
+             </div>
+          </div>
+
+          <!-- Champs spécifiques pour les tournois brackets -->
+          <div class="bracket-tournament-fields" ng-switch-when="Bracket Tournament">
+            <h2>TO DO</h2>
+          </div>
+
+          <!-- Champs spécifiques pour les clan wars -->
+          <div class="clan-war-fields" ng-switch-when="Clan War">
+            <h2>TO DO TOO</h2>
+          </div>
+
+        </div>
       
         <button type="submit" class="btn btn-default">Valider</button>
       </form>

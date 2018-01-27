@@ -15,7 +15,7 @@ if(req.params.id){
 } else {
 
   //Search in Database tournament data
-  TournamentContext.find({}, "id name description date reglement privacy organizer capacity tournamentGemProperty tournamentChallongeProperty", 
+  TournamentContext.find({}, "id name description date reglement privacy organizer capacity kind properties league", 
     function(err, docs){console.log("Boum" + err);})
   .exec(function(err, result) {
         console.log("Result" + JSON.stringify(result));
@@ -40,16 +40,9 @@ if(req.params.id){
   	event.privacy=reqBody.privacy
   	event.organizer=reqBody.organizer
   	event.capacity=reqBody.capacity 
-
-
-  	if(reqBody.tournamentGemProperty){
-  		var tournamentGemProperty = {}
-  		tournamentGemProperty.gemnumber=reqBody.tournamentGemProperty.gemnumber
-  		tournamentGemProperty.password=reqBody.tournamentGemProperty.password
-  		event.tournamentGemProperty=tournamentGemProperty
-  	} else {
-  		console.log("Not managed")
-  	}
+    event.kind=reqBody.kind
+    event.properties=reqBody.properties
+    event.league=reqBody.league
 
   	event.save(function(err){
   		res.status(200).send("OK");
