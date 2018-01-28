@@ -30,6 +30,10 @@ var getPlayer = function(playerId){
   return get("player/" + playerId)
 }
 
+module.exports.getClan = function(clanId){
+  return getClan(clanId)
+}
+
 module.exports.membersClanChestCrowns = function(req, res) {
 
   //Download the necessary data using cr.js client

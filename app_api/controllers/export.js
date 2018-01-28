@@ -34,7 +34,7 @@ module.exports.downloadActivityReport = function(req,res) {
 	var nameRequested=req.params.id
 	var clanAcronym=""
 	console.log('?')
-	var jsonResult = ctrlCrApi.clanChestCrowns(nameRequested)
+	var jsonResult = ctrlCrApi.getClan(nameRequested)
 	.then(function(data){
 	    console.log("Data" + JSON.stringify(data))
 	    clanAcronym=findClanAcronym(data.name);
@@ -64,7 +64,7 @@ module.exports.downloadTrophyReport = function(req,res){
 	var nameRequested=req.params.id
 	var clanAcronym=""
 	console.log("Aqui?")
-	ctrlCrApi.clanChestCrowns(nameRequested)
+	ctrlCrApi.getClan(nameRequested)
 	.then(function(data){
 		clanAcronym=findClanAcronym(data.name);
 		var members=data.members
