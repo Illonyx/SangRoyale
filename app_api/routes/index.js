@@ -16,6 +16,7 @@ var ctrlAbout = require('../controllers/topic');
 var ctrlTournamentContext = require('../controllers/tournamentcontext');
 var ctrlExport = require("../controllers/export")
 var ctrlCrApi = require("../controllers/crapi")
+var ctrlRssFeed = require("../controllers/rssfeed")
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -42,6 +43,9 @@ router.delete('/tournamentcontext/:id', ctrlTournamentContext.delete_event);
 //Export
 router.get('/download/activity/:id', ctrlExport.downloadActivityReport); 
 router.get('/download/trophy/:id', ctrlExport.downloadTrophyReport); 
+
+//Rss feeds
+router.get('/rss', ctrlRssFeed.feed)
 
 
 	

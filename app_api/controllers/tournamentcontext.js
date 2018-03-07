@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var TournamentContext = mongoose.model('TournamentContext');
 
+var RssFeed = require('./rssfeed')
+
 module.exports.tournamentcontext = function(req, res) {
 
 if(req.params.id){
@@ -43,6 +45,8 @@ if(req.params.id){
     event.kind=reqBody.kind
     event.properties=reqBody.properties
     event.league=reqBody.league
+
+    RssFeed.addItem(event)
 
   	event.save(function(err){
   		res.status(200).send("OK");
