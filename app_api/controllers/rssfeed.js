@@ -16,8 +16,11 @@ const feed = new Feed({
 module.exports.feed = function(req, res){
 
 	console.log("Explose3")
+	res.set('Content-Type', 'text/xml');
 	res.send(feed.rss2())
 }
+
+
 
 module.exports.addItem = function(event){
 	feed.addItem({
