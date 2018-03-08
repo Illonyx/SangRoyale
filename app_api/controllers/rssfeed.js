@@ -1,18 +1,16 @@
 const Feed = require('feed');
 let feed = new Feed({
-  title: 'Feed Title',
-  description: 'This is my personal feed!',
-  id: 'http://example.com/',
-  link: 'http://example.com/',
-  image: 'http://example.com/image.png',
-  favicon: 'http://example.com/favicon.ico',
-  copyright: 'All rights reserved 2013, John Doe',
+  title: 'Fil d actu de Sang Royale',
+  description: 'Ce flux contient tous les évènements organisés par la famille de clans Sang Royale',
+  id: 'http://www.sangroyale.fr/',
+  link: 'http://www.sangroyale.fr/',
+  copyright: 'All rights reserved 2018, Alexis Mathey',
   updated: new Date(2013, 06, 14), // optional, default = today
   generator: 'awesome', // optional, default = 'Feed for Node.js'
   author: {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    link: 'https://example.com/johndoe'
+    name: 'Skyice',
+    email: 'vespade@gmail.com',
+    link: 'http://www.sangroyale.fr/'
   }
 })
 
