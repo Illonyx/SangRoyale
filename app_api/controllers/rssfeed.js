@@ -25,8 +25,6 @@ module.exports.feed = function(req, res){
 module.exports.addItem = function(event){
 	feed.addItem({
 		title : event.name,
-		id: "http://www.sangroyale.fr",
-		link:"http://www.sangroyale.fr",
 		description : "Un évènement SR",
 	})
 }
