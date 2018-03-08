@@ -1,18 +1,24 @@
 const Feed = require('feed');
-const feed = new Feed({
-	    title:          'My Feed Title',
-	    description:    'This is my personnal feed!',
-	    link:           'http://example.com/',
-	    image:          'http://example.com/logo.png',
-	    copyright:      'Copyright © 2013 John Doe. All rights reserved',
-	    id: 'http://www.sangroyale.fr/',
-
-	    author: {
-	        name:       'John Doe',
-	        email:      'john.doe@example.com',
-	        link:       'https://example.com/john-doe'
-	    }
-	});
+let feed = new Feed({
+  title: 'Feed Title',
+  description: 'This is my personal feed!',
+  id: 'http://example.com/',
+  link: 'http://example.com/',
+  image: 'http://example.com/image.png',
+  favicon: 'http://example.com/favicon.ico',
+  copyright: 'All rights reserved 2013, John Doe',
+  updated: new Date(2013, 06, 14), // optional, default = today
+  generator: 'awesome', // optional, default = 'Feed for Node.js'
+  feedLinks: {
+    json: 'https://example.com/json',
+    atom: 'https://example.com/atom',
+  },
+  author: {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    link: 'https://example.com/johndoe'
+  }
+})
 
 module.exports.feed = function(req, res){
 
