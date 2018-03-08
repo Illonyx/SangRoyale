@@ -5,6 +5,10 @@
       <h1>Ajout d'un évènement</h1>
       <form ng-submit="vm.onSubmit()">
       <h2>Champs généraux</h2>
+      <div class="form-group">
+          <label for="name">Id du tournoi (mettre TR + le nombre de tournoi) </label>
+          <input type="text" class="form-control" id="id" placeholder="Entrer l'id du tournoi" ng-model="vm.event.id">
+        </div>
         <div class="form-group">
           <label for="name">Nom du tournoi</label>
           <input type="text" class="form-control" id="name" placeholder="Entrer le nom du tournoi" ng-model="vm.event.name">

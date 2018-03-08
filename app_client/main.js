@@ -63,6 +63,11 @@
         controller: 'exportsCtrl', 
         controllerAs : 'vm'
       })
+      .when('/event/:id', {
+        templateUrl : '/events/event.html',
+        controller : 'eventCtrl', 
+        controllerAs : 'vm'
+      })
       .when('/events', {
         templateUrl : '/events/events.html', 
         controller: 'eventsCtrl', 
