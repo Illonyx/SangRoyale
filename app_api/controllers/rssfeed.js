@@ -27,7 +27,7 @@ module.exports.addItem = function(event){
 	feed.addItem({
 		title : event.name,
 		description : "Un évènement SR",
-		date: new Date(2013, 06, 14), 
+		date: Date.now(), 
 		guid : "http://www.sangroyale.fr/event/" + event.id
 	})
 }
