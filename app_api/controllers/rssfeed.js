@@ -5,7 +5,7 @@ let feed = new Feed({
   id: 'http://www.sangroyale.fr/',
   link: 'http://www.sangroyale.fr/',
   copyright: 'All rights reserved 2018, Alexis Mathey',
-  updated: new Date(2013, 06, 14), // optional, default = today
+  updated: new Date(), // optional, default = today
   generator: 'awesome', // optional, default = 'Feed for Node.js'
   author: {
     name: 'Skyice',
@@ -27,7 +27,7 @@ module.exports.addItem = function(event){
 	feed.addItem({
 		title : event.name,
 		description : "Un évènement SR",
-		date: Date.now(), 
+		date: new Date(), 
 		guid : "http://www.sangroyale.fr/event/" + event.id
 	})
 }
