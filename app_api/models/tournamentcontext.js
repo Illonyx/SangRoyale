@@ -13,8 +13,12 @@ var tournamentContextSchema = new mongoose.Schema({
     capacity : {type : Number, require : false},
     kind : String, 
     league : {type : String, require : false},
-    properties : Object
-    
+    properties : Object, 
+    alerts : [{
+        id : String,
+        date : String, 
+        description : String
+    }]
 	
 });
 

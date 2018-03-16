@@ -6,11 +6,21 @@ if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
 
+// BRING IN YOUR SCHEMAS & MODELS
+require('./users');
+require('./topic');
+require('./tournamentcontext')
+
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
   console.log('Mongoose connected to ' + dbURI);
+  
+  //Once Db connected, start cron Manager -- C'est quand meme un peu crado :D
+  var ctrlTournamentContext = require('../controllers/tournamentcontext')
+  ctrlTournamentContext.findalerts()
+
 });
 mongoose.connection.on('error', function(err) {
   console.log('Mongoose connection error: ' + err);
@@ -46,7 +56,5 @@ process.on('SIGTERM', function() {
   });
 });
 
-// BRING IN YOUR SCHEMAS & MODELS
-require('./users');
-require('./topic');
-require('./tournamentcontext')
+
+

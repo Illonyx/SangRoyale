@@ -1,7 +1,7 @@
 
 /* Topic elements stuff */
 
-#synthesis-data {
+#synthesis-data, .bordered-content {
 	border-style: solid;
 	border-width: medium;
 
@@ -20,6 +20,12 @@
 #sr-intro-prince {
 	font-size : 180%;
 	font-weight : bold;
+}
+
+.section {
+    border: 1px solid black;
+    padding: 25px 50px;
+    background-color: lightblue;
 }
 
 .centered {

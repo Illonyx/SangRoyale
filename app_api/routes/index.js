@@ -16,7 +16,7 @@ var ctrlAbout = require('../controllers/topic');
 var ctrlTournamentContext = require('../controllers/tournamentcontext');
 var ctrlExport = require("../controllers/export")
 var ctrlCrApi = require("../controllers/crapi")
-var ctrlRssFeed = require("../controllers/rssfeed")
+var ctrlRssFeed = require("../utils/rssfeed")
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);

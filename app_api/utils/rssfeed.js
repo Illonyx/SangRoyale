@@ -1,4 +1,6 @@
 const Feed = require('feed');
+
+
 let feed = new Feed({
   title: 'Fil d actu de Sang Royale',
   description: 'Ce flux contient tous les évènements organisés par la famille de clans Sang Royale',
@@ -23,11 +25,11 @@ module.exports.feed = function(req, res){
 
 
 
-module.exports.addItem = function(event){
+module.exports.addItem = function(idItem, descriptionItem){
 	feed.addItem({
-		title : event.name,
-		description : "Un évènement SR",
+		title : "Rappel automatique d'un évènement Sang Royale",
+		description : descriptionItem,
 		date: new Date(), 
-		guid : "http://www.sangroyale.fr/event/" + event.id
+		guid : "http://www.sangroyale.fr/event/" + idItem
 	})
 }

@@ -10,7 +10,7 @@ var get = function(extension){
   console.log('uri' + extension)
   var options = {
     'method' : 'GET',
-    'uri': 'http://api.cr-api.com/' + extension, 
+    'uri': 'http://api.royaleapi.com/' + extension, 
     'headers': { 
       'User-Agent' : 'Sang Royale Website',
       'auth': crApiSecretKey
