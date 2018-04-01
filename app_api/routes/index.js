@@ -41,6 +41,9 @@ router.post('/tournamentcontext', ctrlTournamentContext.create_event);
 router.delete('/tournamentcontext/:id', ctrlTournamentContext.delete_event);
 
 //Export
+router.get('/filecheck', ctrlExport.fileCheck)
+router.get('/generate/activity/:id', ctrlExport.generateActivityReport); 
+router.get('/generate/trophy/:id', ctrlExport.generateTrophyReport); 
 router.get('/download/activity/:id', ctrlExport.downloadActivityReport); 
 router.get('/download/trophy/:id', ctrlExport.downloadTrophyReport); 
 
