@@ -137,6 +137,9 @@ input[readonly]{
 
 body {
   margin: 0;
+  color : black;
+  background-color : red;
+  background-image: url('../images/cr-arena.jpg');
 }
 
 @font-face {
