@@ -26,12 +26,37 @@ var getClan = function(clanId){
   return get('clan/' + clanId)
 }
 
+var getClanWarlog = function(clanId){
+  return get('clan/' + clanId + "/warlog")
+}
+
+module.exports.getSRFamily = function(){
+  return get('clan/family/sr/clans')
+}
+
 var getPlayer = function(playerId){
   return get("player/" + playerId)
 }
 
 module.exports.getClan = function(clanId){
   return getClan(clanId)
+}
+
+module.exports.getPlayer = function(req, res){
+  var playerId = req.params.id
+  getPlayer(playerId).then(function(data){
+    res.status(200).json(data)
+  })
+}
+
+module.exports.apiClanWarLog = function(req, res){
+  var clanId = req.params.id
+  getClanWarlog(clanId).then(function(data){
+    console.log('OK')
+    res.status(200).json(data)
+  }).catch(function(error){
+    res.status(500).send("Probleme de récupération des données")
+  });
 }
 
 module.exports.membersClanChestCrowns = function(req, res) {

@@ -181,7 +181,7 @@ module.exports.generateTrophyReport = function(req,res){
 	}).then(function(playerdata){
 		
 		var playerDataMapped = playerdata.map(function(player){
-			return {"name": player.name, "tag": player.tag, "trophies" : player.trophies, "record" : player.stats.maxTrophies, 
+			return {"name": player.name, "tag": player.tag, "trophies" : player.trophies, "record" : player.stats.maxTrophies, "wardaywins" : player.games.warDayWins, "wardaycollected" : player.stats.clanCardsCollected,
 				 "previousSeason" : (player.leagueStatistics) ? (player.leagueStatistics.previousSeason) ? player.leagueStatistics.previousSeason.bestTrophies : "" : "", "challengeCardsWon" : player.stats.challengeCardsWon}
 		})
 		playerDataMapped.sort(function(a,b){

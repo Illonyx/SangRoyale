@@ -29,6 +29,8 @@ router.post('/login', ctrlAuth.login);
 router.get('/tournaments', ctrlTournaments.tournaments);
 
 //CrApi
+router.get('/player/:id', ctrlCrApi.getPlayer)
+router.get('/clanwarlog/:id', ctrlCrApi.apiClanWarLog)
 router.get('/membersClanChestCrowns/:id', ctrlCrApi.membersClanChestCrowns)
 
 //About
