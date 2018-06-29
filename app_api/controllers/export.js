@@ -109,43 +109,69 @@ module.exports.downloadActivityReport = function(req, res){
 	res.download(filePath, fileName)
 }
 
+var formatPlayerResult = function(played,wins){
+  if(played == 0) return "NP"
+  var result = ""
+  for(var i=0;i<played;i++){
+    if(i<wins) result += "W"
+    else result += "L"
+  }
+  return result
+
+}
+
 module.exports.generateActivityReport = function(req,res) {
-	var nameRequested=req.params.id
-	res.status(200).write("Received")
-	var clanAcronym=""
-	console.log("Start bull job")
+	var clanId=req.params.id
+	console.log("Activity generation demand received")
+	res.status(200).send("OK")
+	var clanToFind = sangRoyaleFamily.find(function(clan){
+		return (clanId == clan.id)
+	})
+	var clanAcronym = findClanAcronym(clanToFind.name)
 	
-		var jsonResult = ctrlCrApi.getClan(nameRequested)
-	.then(function(data){
-	    console.log("Data" + JSON.stringify(data))
-	    clanAcronym=findClanAcronym(data.name);
-	    console.log("clan" + clanAcronym)
-	    var members=data.members;
-	    var membersA = members.map(function(member){
-	      return {"name":member.name, "couronnes":Number(member.clanChestCrowns), "grade": member.role, "dons-faits" : member.donations, "dons-reçus" : member.donationsReceived }
-	    })
-	    membersA.sort(function(a,b){
+		var jsonResult = ctrlCrApi.getClanWarLog(clanId).then(function(data){
+	    console.log("Données téléchargées clan war log")
+		var allParticipants = [];
+    	//Tous les participants existants
+    	data.forEach(function(clanwar){
+      
+      	  //Put good date in string
+      	  var createdDate = new Date(parseInt(clanwar.createdDate)*1000);
+      	  var date = createdDate.getDate() + "-" + (createdDate.getMonth()+1) + "-" + createdDate.getFullYear();
+
+	      for(var i=0;i<clanwar.participants.length;i++){
+	        
+	        var participantFound = allParticipants.find(function(participant){
+	          return clanwar.participants[i].name == participant.name;
+	        })
+	        if(!participantFound){
+	          participantFound = {"name" : clanwar.participants[i].name, "tag" : clanwar.participants[i].tag}
+	          allParticipants.push(participantFound);
+	        }
+	        participantFound["cardsEarned-"+ date] = clanwar.participants[i].cardsEarned
+	        participantFound["finalResult" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].wins)
+	        
+	        var indexToUpdate = allParticipants.indexOf(participantFound)
+	        if(indexToUpdate != -1) allParticipants[indexToUpdate] = participantFound
+	      }
+	  	})
+
+	    allParticipants.sort(function(a,b){
 
 	      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
      	  else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       	  return 0;
 	    })
 
-		var xls = json2xls(membersA)
+		var xls = json2xls(allParticipants)
 		exportExcel(xls, clanAcronym + "-activity.xls")
 		console.log('Job fini')
-		res.status(200).send("OK")
+		//res.status(200).send("OK")
 
 	})
 	.catch(function(error){
     	console.log("Error" + error)
   	});
-
-
-
-
-
-	
    
 }
 
@@ -196,3 +222,63 @@ module.exports.generateTrophyReport = function(req,res){
     	console.log("Error" + error)
   	});
 }
+
+/*
+
+ANCIENNE METHODE : A REPRENDRE PLUS TARD DANS TROPHY
+
+module.exports.downloadActivityReport = function(req, res){
+	
+	//Extract clan acronym
+	var clanId = req.params.id
+	var clanToFind = sangRoyaleFamily.find(function(clan){
+		return (clanId == clan.id)
+	})
+	var clanAcronym = findClanAcronym(clanToFind.name)
+
+	//Find good file
+	var fileName = clanAcronym + "-activity.xls"
+	var appDir = path.dirname(require.main.filename);
+	var filePath = path.join(appDir, 'download', fileName)
+	res.download(filePath, fileName)
+}
+
+module.exports.generateActivityReport = function(req,res) {
+	var nameRequested=req.params.id
+	res.status(200).write("Received")
+	var clanAcronym=""
+	console.log("Start bull job")
+	
+		var jsonResult = ctrlCrApi.getClan(nameRequested)
+	.then(function(data){
+	    console.log("Data" + JSON.stringify(data))
+	    clanAcronym=findClanAcronym(data.name);
+	    console.log("clan" + clanAcronym)
+	    var members=data.members;
+	    var membersA = members.map(function(member){
+	      return {"name":member.name, "couronnes":Number(member.clanChestCrowns), "grade": member.role, "dons-faits" : member.donations, "dons-reçus" : member.donationsReceived }
+	    })
+	    membersA.sort(function(a,b){
+
+	      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+     	  else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+      	  return 0;
+	    })
+
+		var xls = json2xls(membersA)
+		exportExcel(xls, clanAcronym + "-activity.xls")
+		console.log('Job fini')
+		res.status(200).send("OK")
+
+	})
+	.catch(function(error){
+    	console.log("Error" + error)
+  	});
+   
+}
+
+
+
+
+
+*/

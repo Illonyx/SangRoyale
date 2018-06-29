@@ -26,7 +26,7 @@ var getClan = function(clanId){
   return get('clan/' + clanId)
 }
 
-var getClanWarlog = function(clanId){
+module.exports.getClanWarLog = function(clanId){
   return get('clan/' + clanId + "/warlog")
 }
 
@@ -49,11 +49,52 @@ module.exports.getPlayer = function(req, res){
   })
 }
 
+var formatPlayerResult = function(played,wins){
+  if(played == 0) return "NP"
+  var result = ""
+  for(var i=0;i<played;i++){
+    if(i<wins) result += "W"
+    else result += "L"
+  }
+  return result
+
+}
+
 module.exports.apiClanWarLog = function(req, res){
   var clanId = req.params.id
-  getClanWarlog(clanId).then(function(data){
+  getClanWarLog(clanId).then(function(data){
     console.log('OK')
-    res.status(200).json(data)
+    var allParticipants = [];
+    //Tous les participants existants
+    data.forEach(function(clanwar){
+      
+      //Put good date in string
+      var createdDate = new Date(parseInt(clanwar.createdDate)*1000);
+      var date = createdDate.getDate() + "-" + createdDate.getMonth() + "-" + createdDate.getFullYear();
+
+      for(var i=0;i<clanwar.participants.length;i++){
+        
+        var participantFound = allParticipants.find(function(participant){
+          return clanwar.participants[i].name == participant.name;
+        })
+        if(!participantFound){
+          participantFound = {"name" : clanwar.participants[i].name, "tag" : clanwar.participants[i].tag}
+          allParticipants.push(participantFound);
+        }
+        participantFound["cardsEarned-"+ date] = clanwar.participants[i].cardsEarned
+        participantFound["finalResult" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].wins)
+        
+        var indexToUpdate = allParticipants.indexOf(participantFound)
+        if(indexToUpdate != -1) allParticipants[indexToUpdate] = participantFound
+      }
+
+
+    })
+
+
+
+
+    res.status(200).send(data)
   }).catch(function(error){
     res.status(500).send("Probleme de récupération des données")
   });
