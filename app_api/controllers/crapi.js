@@ -60,17 +60,36 @@ var formatPlayerResult = function(played,wins){
 
 }
 
+var formatWarResult = function(standings, clanId){
+  var warResult = {}
+
+  //1. Find clan standing
+  var clanStanding = standings.find(function(participatingClan){
+    return participatingClan.tag == clanId
+  })
+  warResult['standing'] = (standings.indexOf(clanStanding) + 1) + "e pl - " + clanStanding.warTrophies + "(" + clanStanding.warTrophiesChange +")"
+  warResult['battleStat'] = clanStanding.wins + "/" + clanStanding.participants + '(' + clanStanding.crowns +' cr)'
+
+  return warResult
+
+}
+
 module.exports.apiClanWarLog = function(req, res){
   var clanId = req.params.id
-  getClanWarLog(clanId).then(function(data){
-    console.log('OK')
+  get('clan/' + clanId + "/warlog").then(function(data){
+    console.log('Données récup OK')
     var allParticipants = [];
+    var referentialObject = {"name":"Toutes Guerres", "tag" : "/"}
+
     //Tous les participants existants
     data.forEach(function(clanwar){
       
       //Put good date in string
       var createdDate = new Date(parseInt(clanwar.createdDate)*1000);
-      var date = createdDate.getDate() + "-" + createdDate.getMonth() + "-" + createdDate.getFullYear();
+      var date = createdDate.getDate() + "-" + (createdDate.getMonth()+1) + "-" + createdDate.getFullYear();
+      var warResult = formatWarResult(clanwar.standings, clanId)
+      referentialObject["cardsEarned-" + date] = warResult.standing
+      referentialObject["finalResult-" + date] = warResult.battleStat
 
       for(var i=0;i<clanwar.participants.length;i++){
         
@@ -82,7 +101,7 @@ module.exports.apiClanWarLog = function(req, res){
           allParticipants.push(participantFound);
         }
         participantFound["cardsEarned-"+ date] = clanwar.participants[i].cardsEarned
-        participantFound["finalResult" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].wins)
+        participantFound["finalResult-" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].wins)
         
         var indexToUpdate = allParticipants.indexOf(participantFound)
         if(indexToUpdate != -1) allParticipants[indexToUpdate] = participantFound
@@ -91,13 +110,54 @@ module.exports.apiClanWarLog = function(req, res){
 
     })
 
+    //Sort participants if they are here in the clan
 
+    allParticipants.unshift(referentialObject)
 
-
-    res.status(200).send(data)
+    
+    res.status(200).send(allParticipants)
   }).catch(function(error){
     res.status(500).send("Probleme de récupération des données")
   });
+}
+
+module.exports.parseClanWarLog = function(clanId, data) {
+ 
+    var allParticipants = [];
+    var referentialObject = {"name":"Toutes Guerres", "tag" : "/"}
+
+    //Tous les participants existants
+    data.forEach(function(clanwar){
+      
+      //Put good date in string
+      var createdDate = new Date(parseInt(clanwar.createdDate)*1000);
+      var date = createdDate.getDate() + "-" + (createdDate.getMonth()+1) + "-" + createdDate.getFullYear();
+      var warResult = formatWarResult(clanwar.standings, clanId)
+      referentialObject["cardsEarned-" + date] = warResult.standing
+      referentialObject["finalResult-" + date] = warResult.battleStat
+
+      for(var i=0;i<clanwar.participants.length;i++){
+        
+        var participantFound = allParticipants.find(function(participant){
+          return clanwar.participants[i].name == participant.name;
+        })
+        if(!participantFound){
+          participantFound = {"name" : clanwar.participants[i].name, "tag" : clanwar.participants[i].tag}
+          allParticipants.push(participantFound);
+        }
+        participantFound["cardsEarned-"+ date] = clanwar.participants[i].cardsEarned
+        participantFound["finalResult-" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].wins)
+        
+        var indexToUpdate = allParticipants.indexOf(participantFound)
+        if(indexToUpdate != -1) allParticipants[indexToUpdate] = participantFound
+      }
+
+
+    })
+
+    //Sort participants if they are here in the clan
+    allParticipants.unshift(referentialObject)
+    return allParticipants
 }
 
 module.exports.membersClanChestCrowns = function(req, res) {

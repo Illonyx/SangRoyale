@@ -128,45 +128,45 @@ module.exports.generateActivityReport = function(req,res) {
 		return (clanId == clan.id)
 	})
 	var clanAcronym = findClanAcronym(clanToFind.name)
+	var allParticipants = []
 	
 		var jsonResult = ctrlCrApi.getClanWarLog(clanId).then(function(data){
-	    console.log("Données téléchargées clan war log")
-		var allParticipants = [];
-    	//Tous les participants existants
-    	data.forEach(function(clanwar){
-      
-      	  //Put good date in string
-      	  var createdDate = new Date(parseInt(clanwar.createdDate)*1000);
-      	  var date = createdDate.getDate() + "-" + (createdDate.getMonth()+1) + "-" + createdDate.getFullYear();
+	    
+	 	allParticipants = ctrlCrApi.parseClanWarLog(clanId, data)
+		return ctrlCrApi.getClan(clanId)
 
-	      for(var i=0;i<clanwar.participants.length;i++){
-	        
-	        var participantFound = allParticipants.find(function(participant){
-	          return clanwar.participants[i].name == participant.name;
-	        })
-	        if(!participantFound){
-	          participantFound = {"name" : clanwar.participants[i].name, "tag" : clanwar.participants[i].tag}
-	          allParticipants.push(participantFound);
-	        }
-	        participantFound["cardsEarned-"+ date] = clanwar.participants[i].cardsEarned
-	        participantFound["finalResult" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].wins)
-	        
-	        var indexToUpdate = allParticipants.indexOf(participantFound)
-	        if(indexToUpdate != -1) allParticipants[indexToUpdate] = participantFound
-	      }
-	  	})
-
-	    allParticipants.sort(function(a,b){
+	}).then(function(clanResult){
+		console.log("ClanResult :" + JSON.stringify(allParticipants))
+		var allParticipantsInClan = []
+		var allParticipantsOut = []
+		var AllWars = {}
+		for(var i = 0; i<allParticipants.length;i++){
+			var isInClan = clanResult.members.find(function(member){
+				return member.tag==allParticipants[i].tag
+			})
+			console.log("Is in clan?" + isInClan)
+			
+			if(isInClan) allParticipantsInClan.push(allParticipants[i])
+			else if (allParticipants[i].tag == "/") AllWars = allParticipants[i]
+			else allParticipantsOut.push(allParticipants[i])
+		}
+		allParticipantsInClan.sort(function(a,b){
 
 	      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
      	  else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       	  return 0;
 	    })
+	    console.log("allPIn" + JSON.stringify(allParticipantsInClan))
+	    allParticipantsInClan.unshift(AllWars)
+	    allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
 
-		var xls = json2xls(allParticipants)
+	    var xls = json2xls(allParticipantsInClan)
 		exportExcel(xls, clanAcronym + "-activity.xls")
 		console.log('Job fini')
 		//res.status(200).send("OK")
+
+
+
 
 	})
 	.catch(function(error){
