@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+#navigation-component{
+  width: 100%;
+  height: 400px;
+}
+
+#navigation-component #banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+}

@@ -77,18 +77,22 @@ module.exports.fileCheck = function(req, res){
 				results=results.concat(result)
 			})),
 		Promise.resolve()
-	).then(function(result){
-		var reorganisedResults = {}
-		for(var i=0;i<results.length; i++){
-			console.log('logResultI' + JSON.stringify(results[i]))
-			if(!reorganisedResults[results[i].id]) reorganisedResults[results[i].id] = {}
-
-			var resultToUpdate = reorganisedResults[results[i].id]
-			if (results[i].file == "activity") resultToUpdate["mdate-activity"] = results[i].mdate
-			else if (results[i].file == "trophies") resultToUpdate["mdate-trophies"] = results[i].mdate
-			else console.log("Y'a un souci mon capitaine")
-		}
-		res.status(200).send(reorganisedResults)
+	).then(function(done){
+		var reorganisedResults = []
+		sangRoyaleFamily.forEach(function(clan){
+			var allExportsForId = results.filter(function(arrElt){
+				return clan.id == arrElt.id
+			})
+			var result = {}
+			result["id"]=clan.id
+			allExportsForId.forEach(function(exportForId){
+				result["mdate_"+ exportForId.file] = exportForId.mdate
+			});
+			console.log(JSON.stringify(result))
+			reorganisedResults.push(result)
+		});
+		console.log("Reorg res" + reorganisedResults);
+		res.status(200).json(reorganisedResults)
 	})
 	
 }

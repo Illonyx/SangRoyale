@@ -37,9 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// [SH] Set the app_client folder to serve static resources
-//app.use(express.static(path.join(__dirname, 'app_client')));
-app.use(express.static(path.join(__dirname, 'dist/test-app')));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/scripts', express.static(__dirname + '/node_modules'));
 
 // [SH] Initialise Passport before using the route middleware
@@ -51,10 +49,9 @@ app.use('/api', routesApi);
 // [SH] Otherwise render the index.html page for the Angular SPA
 // [SH] This means we don't have to map all of the SPA routes in Express
 app.use(function(req, res) {
-  res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-//
 app.use(json2xls.middleware)
 
 
