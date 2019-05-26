@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
-var json2xls = require('json2xls');
 var fs = require('fs')
 var path = require('path')
 var auth = jwt({
