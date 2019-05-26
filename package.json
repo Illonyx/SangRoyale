@@ -9,10 +9,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e", 
-    "heroku-postbuild": "ng build --prod"
+    "postinstall": "ng build --aot --prod"
   },
   "engines": {
-    "node": "10.6.0"
+    "node": "10.6.0",
+    "npm": "6.1.0"
   },
   "dependencies": {
     "@angular/cli": "~7.3.9",
