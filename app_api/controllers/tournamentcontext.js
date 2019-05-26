@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var TournamentContext = mongoose.model('TournamentContext');
 
-var RssFeed = require('../utils/rssfeed')
+//var RssFeed = require('../utils/rssfeed')
 var cronManager = require('../utils/cron-manager')
 
 module.exports.tournamentcontext = function(req, res) {
