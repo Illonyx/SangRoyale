@@ -11,108 +11,6 @@ var sangRoyaleFamily = [
     {"name":"Sang Royale IV", "id":"8GQL980P"}, 
     {"name":"Sang Royale V", "id":"8VVGJPCR"}]
 
-var findClanAcronym = function(clanName){
-	var acronym = ""
-	clanName = clanName.replace(/ +/g, "");
-	for(var i=0;i<clanName.length;i++){
-		var character = clanName[i]
-		if(character == character.toUpperCase()){
-			acronym += character
-		}
-	}
-	return acronym.toLowerCase()
-}
-
-var exportExcel = function(xls, fileName){
-	console.log('What')
-	var appDir = path.dirname(require.main.filename);
-	var filePath = path.join(appDir, 'download', fileName)
-	console.log(filePath)
-	fs.writeFile(filePath, xls, "binary", function(err) {
-		if(err) {
-    		return console.log(err);
-		}
-		console.log("The file was saved!");
-		//res.download(filePath, fileName)
-	});
-}
-
-function findLastModificationDate(path){
-	return new Promise(function(resolve, reject){
-		fs.stat(path, function(err,stats){
-			if(err) reject("Une erreur est survenue")
-			else resolve(stats.mtime)
-		})
-	})
-}
-
-
-function promiseForClan(clan){
-	var appDir = path.dirname(require.main.filename);
-	var dataToSend = []
-	return new Promise(function(resolve, reject){
-		var clanAcronym = findClanAcronym(clan.name)
-		var activityFile = path.join(appDir, 'download', clanAcronym + "-activity.xls")
-		var trophyFile = path.join(appDir, 'download', clanAcronym + "-trophy.xls")
-
-		findLastModificationDate(activityFile).then(function(result){
-			dataToSend.push({"id":clan.id,"file":"activity","mdate":result})
-			return findLastModificationDate(trophyFile)
-		}).then(function(result){
-			dataToSend.push({"id":clan.id,"file":"trophies","mdate":result})
-			resolve(dataToSend)
-		})
-
-	})
-}
-
-module.exports.fileCheck = function(req, res){
-	//Extract clan acronym
-	
-	var results = []
-	sangRoyaleFamily.reduce(
-		(promise,clan) =>
-			promise.then( _ => promiseForClan(clan).then(function(result){
-				console.log(JSON.stringify(result) + "Jouer1")
-				results=results.concat(result)
-			})),
-		Promise.resolve()
-	).then(function(done){
-		var reorganisedResults = []
-		sangRoyaleFamily.forEach(function(clan){
-			var allExportsForId = results.filter(function(arrElt){
-				return clan.id == arrElt.id
-			})
-			var result = {}
-			result["id"]=clan.id
-			allExportsForId.forEach(function(exportForId){
-				result["mdate_"+ exportForId.file] = exportForId.mdate
-			});
-			console.log(JSON.stringify(result))
-			reorganisedResults.push(result)
-		});
-		console.log("Reorg res" + reorganisedResults);
-		res.status(200).json(reorganisedResults)
-	})
-	
-}
-
-module.exports.downloadActivityReport = function(req, res){
-	
-	//Extract clan acronym
-	var clanId = req.params.id
-	var clanToFind = sangRoyaleFamily.find(function(clan){
-		return (clanId == clan.id)
-	})
-	var clanAcronym = findClanAcronym(clanToFind.name)
-
-	//Find good file
-	var fileName = clanAcronym + "-activity.xls"
-	var appDir = path.dirname(require.main.filename);
-	var filePath = path.join(appDir, 'download', fileName)
-	res.download(filePath, fileName)
-}
-
 var formatPlayerResult = function(played,wins){
   if(played == 0) return "NP"
   var result = ""
@@ -124,16 +22,12 @@ var formatPlayerResult = function(played,wins){
 
 }
 
-module.exports.generateActivityReport = function(req,res) {
+module.exports.generateGdcReport = function(req,res) {
 	var clanId=req.params.id
 	console.log("Activity generation demand received")
-	var clanToFind = sangRoyaleFamily.find(function(clan){
-		return (clanId == clan.id)
-	})
-	var clanAcronym = findClanAcronym(clanToFind.name)
 	var allParticipants = []
 	
-		var jsonResult = ctrlCrApi.getClanWarLog(clanId).then(function(data){
+	var jsonResult = ctrlCrApi.getClanWarLog(clanId).then(function(data){
 	    
 	 	allParticipants = ctrlCrApi.parseClanWarLog(clanId, data)
 		return ctrlCrApi.getClan(clanId)
@@ -162,46 +56,22 @@ module.exports.generateActivityReport = function(req,res) {
 	    console.log("allPIn" + JSON.stringify(allParticipantsInClan))
 	    allParticipantsInClan.unshift(AllWars)
 	    allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
-	    return allParticipantsInClan;
-
-	    var xls = json2xls(allParticipantsInClan)
-		exportExcel(xls, clanAcronym + "-activity.xls")
-		console.log('Job fini')
-		//res.status(200).send("OK")
-
-
-
+	    res.status(200).json(allParticipantsInClan);
 
 	})
 	.catch(function(error){
-    	console.log("Error" + error)
+    	console.log("Error Generate Activity Report : " + error)
+    	res.status(503).json({"status" : error, "reason" : error})
   	});
    
-}
-
-module.exports.downloadTrophyReport = function(req, res){
-	//Extract clan acronym
-	var clanId = req.params.id
-	var clanToFind = sangRoyaleFamily.find(function(clan){
-		return (clanId == clan.id)
-	})
-	var clanAcronym = findClanAcronym(clanToFind.name)
-
-	//Find good file
-	var fileName = clanAcronym + "-trophy.xls"
-	var appDir = path.dirname(require.main.filename);
-	var filePath = path.join(appDir, 'download', fileName)
-	res.download(filePath, fileName)
 }
 
 module.exports.generateTrophyReport = function(req,res){
 	var nameRequested=req.params.id
 	//res.status(200).send("OK")
-	var clanAcronym=""
 	console.log("Aqui?")
 	ctrlCrApi.getClan(nameRequested)
 	.then(function(data){
-		clanAcronym=findClanAcronym(data.name);
 		var members=data.members
 		var memberTags = members.map(function(member){
 			return member.tag
@@ -221,11 +91,10 @@ module.exports.generateTrophyReport = function(req,res){
 		})
 		console.log("We are jeree")
 		res.status(200).json(playerDataMapped);
-		//var xls = json2xls(playerDataMapped)
-		//exportExcel(xls, clanAcronym + "-trophy.xls")
 
 	}).catch(function(error){
-    	console.log("Error" + error)
+		console.log("Erreur generateTrophyReport" + JSON.stringify(error))
+    	res.status(503).json({"status" : error, "reason" : error})
   	});
 }
 

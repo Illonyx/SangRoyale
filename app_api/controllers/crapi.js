@@ -126,6 +126,14 @@ module.exports.parseClanWarLog = function(clanId, data) {
     var allParticipants = [];
     var referentialObject = {"name":"Toutes Guerres", "tag" : "/"}
 
+    //Sort by ascending created date
+    console.log("API Data" + JSON.stringify(data));
+
+    data.sort(function(clanwar1, clanwar2){
+      return clanwar1.createdDate - clanwar2.createdDate;
+    })
+
+
     //Tous les participants existants
     data.forEach(function(clanwar){
       
@@ -159,31 +167,6 @@ module.exports.parseClanWarLog = function(clanId, data) {
     allParticipants.unshift(referentialObject)
     return allParticipants
 }
-
-module.exports.membersClanChestCrowns = function(req, res) {
-
-  //Download the necessary data using cr.js client
-
-  var clanId = req.params.id
-  console.log("Processing with clanId : " + clanId)
-  getClan(clanId).then(function(data){
-  	console.log("Data" + JSON.stringify(data))
-  	var name=data.name;
-  	var members=data.members;
-  	var members = members.map(function(member){
-  		return {"name":member.name, "clanChestCrowns":Number(member.clanChestCrowns)}
-  	})
-  	members.sort(function(a,b){
-  		return a.clanChestCrowns - b.clanChestCrowns
-  	})
-
-  	res.status(200).json({"name":name,"members":members});
-
-  }).catch(function(error){
-  	res.status(500).send("Probleme de récupération des données")
-  });
-  	
- }
 
 module.exports.playersStats = function(playerIds){
   var playersInUrl = ""

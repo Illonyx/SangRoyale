@@ -40,14 +40,14 @@
         <button mat-raised-button color="primary" (click)="downloadReport()"
         *ngIf="selectedClan != null && selectedType != null"
         >Télécharger</button>
-        {{selectedClan}}
   </mat-card-actions>
 
   <mat-card class="progress-card">
      <mat-card-title>Génération du rapport pour le téléchargement</mat-card-title>
     <mat-card-content>
-      <p class="progress-label">Téléchargement des données depuis CR-API (1/3)</p>
-     <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      <p *ngIf="raisedError == false" class="progress-label">{{progressString}}</p>
+      <p *ngIf="raisedError == true" class="progress-error">{{errorReason}}</p>
+     <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
     </mat-card-content>
   </mat-card>
 

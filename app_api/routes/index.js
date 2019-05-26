@@ -31,7 +31,6 @@ router.get('/tournaments', ctrlTournaments.tournaments);
 //CrApi
 router.get('/player/:id', ctrlCrApi.getPlayer)
 router.get('/clanwarlog/:id', ctrlCrApi.apiClanWarLog)
-router.get('/membersClanChestCrowns/:id', ctrlCrApi.membersClanChestCrowns)
 
 //About
 router.get('/about',ctrlAbout.topic);
@@ -43,11 +42,8 @@ router.post('/tournamentcontext', ctrlTournamentContext.create_event);
 router.delete('/tournamentcontext/:id', ctrlTournamentContext.delete_event);
 
 //Export
-router.get('/filecheck', ctrlExport.fileCheck)
-router.get('/generate/activity/:id', ctrlExport.generateActivityReport); 
+router.get('/generate/gdc/:id', ctrlExport.generateGdcReport); 
 router.get('/generate/trophy/:id', ctrlExport.generateTrophyReport); 
-router.get('/download/activity/:id', ctrlExport.downloadActivityReport); 
-router.get('/download/trophy/:id', ctrlExport.downloadTrophyReport); 
 
 //Rss feeds
 router.get('/rss', ctrlRssFeed.feed)
