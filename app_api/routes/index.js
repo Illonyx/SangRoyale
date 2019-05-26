@@ -16,7 +16,7 @@ var ctrlAbout = require('../controllers/topic');
 var ctrlTournamentContext = require('../controllers/tournamentcontext');
 var ctrlExport = require("../controllers/export")
 var ctrlCrApi = require("../controllers/crapi")
-var ctrlRssFeed = require("../utils/rssfeed")
+//var ctrlRssFeed = require("../utils/rssfeed")
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -46,7 +46,7 @@ router.get('/generate/gdc/:id', ctrlExport.generateGdcReport);
 router.get('/generate/trophy/:id', ctrlExport.generateTrophyReport); 
 
 //Rss feeds
-router.get('/rss', ctrlRssFeed.feed)
+//router.get('/rss', ctrlRssFeed.feed)
 
 
 	

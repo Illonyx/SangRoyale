@@ -1,4 +1,4 @@
-const Feed = require('feed');
+/*const Feed = require('feed');
 
 
 let feed = new Feed({
@@ -32,4 +32,4 @@ module.exports.addItem = function(idItem, descriptionItem){
 		date: new Date(), 
 		guid : "http://www.sangroyale.fr/event/" + idItem
 	})
-}
+}*/

@@ -1,4 +1,3 @@
-var json2xls = require('json2xls');
 var fs = require('fs')
 var path = require('path')
 
