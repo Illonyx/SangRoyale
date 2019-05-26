@@ -127,7 +127,6 @@ var formatPlayerResult = function(played,wins){
 module.exports.generateActivityReport = function(req,res) {
 	var clanId=req.params.id
 	console.log("Activity generation demand received")
-	res.status(200).send("OK")
 	var clanToFind = sangRoyaleFamily.find(function(clan){
 		return (clanId == clan.id)
 	})
@@ -163,6 +162,7 @@ module.exports.generateActivityReport = function(req,res) {
 	    console.log("allPIn" + JSON.stringify(allParticipantsInClan))
 	    allParticipantsInClan.unshift(AllWars)
 	    allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
+	    return allParticipantsInClan;
 
 	    var xls = json2xls(allParticipantsInClan)
 		exportExcel(xls, clanAcronym + "-activity.xls")
@@ -196,7 +196,7 @@ module.exports.downloadTrophyReport = function(req, res){
 
 module.exports.generateTrophyReport = function(req,res){
 	var nameRequested=req.params.id
-	res.status(200).send("OK")
+	//res.status(200).send("OK")
 	var clanAcronym=""
 	console.log("Aqui?")
 	ctrlCrApi.getClan(nameRequested)
@@ -219,8 +219,10 @@ module.exports.generateTrophyReport = function(req,res){
      		else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       		return 0;
 		})
-		var xls = json2xls(playerDataMapped)
-		exportExcel(xls, clanAcronym + "-trophy.xls")
+		console.log("We are jeree")
+		res.status(200).json(playerDataMapped);
+		//var xls = json2xls(playerDataMapped)
+		//exportExcel(xls, clanAcronym + "-trophy.xls")
 
 	}).catch(function(error){
     	console.log("Error" + error)

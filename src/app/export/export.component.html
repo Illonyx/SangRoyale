@@ -8,7 +8,7 @@
     <mat-form-field>
       <mat-label>Selection du clan</mat-label>
       <mat-select [(ngModel)]="selectedClan" name="clan" required>
-        <mat-option *ngFor="let clan of clans" [value]="clan.id">{{clan.name}}</mat-option>
+        <mat-option *ngFor="let clan of clans" [value]="clan">{{clan.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -40,6 +40,7 @@
         <button mat-raised-button color="primary" (click)="downloadReport()"
         *ngIf="selectedClan != null && selectedType != null"
         >Télécharger</button>
+        {{selectedClan}}
   </mat-card-actions>
 
   <mat-card class="progress-card">

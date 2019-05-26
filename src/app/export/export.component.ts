@@ -12,12 +12,11 @@ export interface Clan {
   styleUrls: ['./export.component.css']
 })
 export class ExportComponent {
-  fileCheck=[]
   selectedClan : Clan;
   selectedType : string;
 
   clans : Clan[] = [
-    {"name":"Sang Royale", "id":"CJQLP2"}, 
+    {"name":"Sang Royale", "id":"CJQLP2"}, //Problème sur l'ID de Sang Royale
     {"name":"Sang Royale II", "id":"2LUU0R0L"}, 
     {"name":"Sang Royale III", "id":"8CPG2YU"}, 
     {"name":"Sang Royale IV", "id":"8GQL980P"}, 
@@ -27,13 +26,21 @@ export class ExportComponent {
 
   constructor(private exportService: ExportService){}
 
-   /*ngOnInit() {
-    this.exportService.getFileCheck().subscribe(data => {
-      console.log(JSON.stringify(data));
-      this.fileCheck=data;
-    });
-  }*/
+  downloadReport(){
+    console.log(JSON.stringify(this.selectedClan));
+    var report = {
+      data : this.selectedClan.id, 
+      type : (this.selectedType == "GDC") ? "trophy" : "activity",
+      output : "excel"
+    }
 
+    var that = this;
+    this.exportService.generateReport(report).subscribe(function(data){
+      console.log("Received data : " + data);
+      that.exportService.exportAsExcelFile(data, 'sample');
+    });
+
+  }
 
 
   
