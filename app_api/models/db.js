@@ -18,8 +18,8 @@ mongoose.connection.on('connected', function() {
   console.log('Mongoose connected to ' + dbURI);
   
   //Once Db connected, start cron Manager -- C'est quand meme un peu crado :D
-  var ctrlTournamentContext = require('../controllers/tournamentcontext')
-  ctrlTournamentContext.findalerts()
+  //var ctrlTournamentContext = require('../controllers/tournamentcontext')
+  //ctrlTournamentContext.findalerts()
 
 });
 mongoose.connection.on('error', function(err) {

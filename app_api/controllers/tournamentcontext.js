@@ -29,17 +29,17 @@ if(req.params.id){
   };
 
 
-module.exports.findalerts = function(){
-  var allEventAlerts = []
-  TournamentContext.find({}, "id alerts", function(err, docs){console.log("Hmmm")}).exec(function(err,result){
-    allEventAlerts=result
-    console.log('Résultat Find Alerts' + JSON.stringify(allEventAlerts))
+// module.exports.findalerts = function(){
+//   var allEventAlerts = []
+//   TournamentContext.find({}, "id alerts", function(err, docs){console.log("Hmmm")}).exec(function(err,result){
+//     allEventAlerts=result
+//     console.log('Résultat Find Alerts' + JSON.stringify(allEventAlerts))
 
-    cronManager.initializeJobs(allEventAlerts)
+//     cronManager.initializeJobs(allEventAlerts)
     
-  })
+//   })
   
-}
+// }
 
   module.exports.create_event = function (req, res){
   	var event = new TournamentContext()

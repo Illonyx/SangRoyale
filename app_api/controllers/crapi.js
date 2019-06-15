@@ -44,7 +44,7 @@ module.exports.getClan = function(clanId){
 
 module.exports.getPlayer = function(req, res){
   var playerId = req.params.id
-  getPlayer(playerId).then(function(data){
+  return getPlayer(playerId).then(function(data){
     res.status(200).json(data)
   })
 }
@@ -115,9 +115,9 @@ module.exports.apiClanWarLog = function(req, res){
     allParticipants.unshift(referentialObject)
 
     
-    res.status(200).send(allParticipants)
+    return res.status(200).send(allParticipants)
   }).catch(function(error){
-    res.status(500).send("Probleme de récupération des données")
+    return res.status(500).send("Probleme de récupération des données")
   });
 }
 

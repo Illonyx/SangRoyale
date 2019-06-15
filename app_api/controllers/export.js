@@ -55,12 +55,12 @@ module.exports.generateGdcReport = function(req,res) {
 	    console.log("allPIn" + JSON.stringify(allParticipantsInClan))
 	    allParticipantsInClan.unshift(AllWars)
 	    allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
-	    res.status(200).json(allParticipantsInClan);
+	    return res.status(200).json(allParticipantsInClan);
 
 	})
 	.catch(function(error){
     	console.log("Error Generate Activity Report : " + error)
-    	res.status(503).json({"status" : error, "reason" : error})
+    	return res.status(503).json({"status" : error, "reason" : error})
   	});
    
 }
@@ -89,11 +89,11 @@ module.exports.generateTrophyReport = function(req,res){
       		return 0;
 		})
 		console.log("We are jeree")
-		res.status(200).json(playerDataMapped);
+		return res.status(200).json(playerDataMapped);
 
 	}).catch(function(error){
 		console.log("Erreur generateTrophyReport" + JSON.stringify(error))
-    	res.status(503).json({"status" : error, "reason" : error})
+    return res.status(503).json({"status" : error, "reason" : error})
   	});
 }
 
