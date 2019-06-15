@@ -29,7 +29,7 @@ router.get('/tournaments', ctrlTournaments.tournaments);
 
 //CrApi
 router.get('/player/:id', ctrlCrApi.getPlayer)
-router.get('/clanwarlog/:id', ctrlCrApi.apiClanWarLog)
+router.get('/royaleapi/:id', ctrlCrApi.consumeApi)
 
 //About
 router.get('/about',ctrlAbout.topic);

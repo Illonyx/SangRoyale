@@ -23,19 +23,20 @@ var formatPlayerResult = function(played,wins){
 
 module.exports.generateGdcReport = function(req,res) {
 	var clanId=req.params.id
-	console.log("Activity generation demand received")
-	var allParticipants = []
+	console.log("GDC report generation!")
 	
-	var jsonResult = ctrlCrApi.getClanWarLog(clanId).then(function(data){
+	var parseResult = {}
+	
+	return ctrlCrApi.getClanWarLog(clanId).then(function(data){
 	    
-	 	allParticipants = ctrlCrApi.parseClanWarLog(clanId, data)
+		parseResult = ctrlCrApi.parseClanWarLog(clanId, data)
 		return ctrlCrApi.getClan(clanId)
 
 	}).then(function(clanResult){
+		var allParticipants = parseResult.participants;
 		console.log("ClanResult :" + JSON.stringify(allParticipants))
 		var allParticipantsInClan = []
 		var allParticipantsOut = []
-		var AllWars = {}
 		for(var i = 0; i<allParticipants.length;i++){
 			var isInClan = clanResult.members.find(function(member){
 				return member.tag==allParticipants[i].tag
@@ -43,7 +44,6 @@ module.exports.generateGdcReport = function(req,res) {
 			console.log("Is in clan?" + isInClan)
 			
 			if(isInClan) allParticipantsInClan.push(allParticipants[i])
-			else if (allParticipants[i].tag == "/") AllWars = allParticipants[i]
 			else allParticipantsOut.push(allParticipants[i])
 		}
 		allParticipantsInClan.sort(function(a,b){
@@ -53,9 +53,10 @@ module.exports.generateGdcReport = function(req,res) {
       	  return 0;
 	    })
 	    console.log("allPIn" + JSON.stringify(allParticipantsInClan))
-	    allParticipantsInClan.unshift(AllWars)
-	    allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
-	    return res.status(200).json(allParticipantsInClan);
+			allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
+			
+			parseResult.participants=allParticipantsInClan;
+	    return res.status(200).json(parseResult);
 
 	})
 	.catch(function(error){
@@ -66,10 +67,10 @@ module.exports.generateGdcReport = function(req,res) {
 }
 
 module.exports.generateTrophyReport = function(req,res){
-	var nameRequested=req.params.id
-	//res.status(200).send("OK")
-	console.log("Aqui?")
-	ctrlCrApi.getClan(nameRequested)
+	var nameRequested=req.params.id;
+	console.log("Trophy report generation");
+
+	return ctrlCrApi.getClan(nameRequested)
 	.then(function(data){
 		var members=data.members
 		var memberTags = members.map(function(member){
