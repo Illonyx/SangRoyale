@@ -5,11 +5,12 @@
 
 #navigation-component{
   width: 100%;
-  height: 400px;
+  height: 250px;
 }
 
-#navigation-component #banner {
-  position: relative;
-  width: 100%;
-  height: auto;
+body { 
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+  background-image : url("https://image.noelshack.com/fichiers/2019/22/1/1558946942-4k-wallpaper-architecture-background-1308624.jpg");
+  background-size: 100% auto;
 }
