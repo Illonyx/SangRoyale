@@ -68,11 +68,12 @@ module.exports.generateGdcReport = function(req,res) {
 
 module.exports.generateTrophyReport = function(req,res){
 	var nameRequested=req.params.id;
+	var members = [];
 	console.log("Trophy report generation");
 
 	return ctrlCrApi.getClan(nameRequested)
 	.then(function(data){
-		var members=data.members
+		members=data.members
 		var memberTags = members.map(function(member){
 			return member.tag
 		})
@@ -81,15 +82,21 @@ module.exports.generateTrophyReport = function(req,res){
 	}).then(function(playerdata){
 		
 		var playerDataMapped = playerdata.map(function(player){
-			return {"name": player.name, "tag": player.tag, "trophies" : player.trophies, "record" : player.stats.maxTrophies, "wardaywins" : player.games.warDayWins, "wardaycollected" : player.stats.clanCardsCollected,
+
+			var member = members.find(function(smember){
+				return player.tag == smember.tag;
+			})
+
+			return {"name": player.name, "tag": player.tag, "role": member.role, "expLevel" : member.expLevel, "donations" : member.donations, "donationsReceived" : member.donationsReceived, "trophies" : player.trophies, "record" : player.stats.maxTrophies, "wardaywins" : player.games.warDayWins, "wardaycollected" : player.stats.clanCardsCollected,
 				 "previousSeason" : (player.leagueStatistics) ? (player.leagueStatistics.previousSeason) ? player.leagueStatistics.previousSeason.bestTrophies : "" : "", "challengeCardsWon" : player.stats.challengeCardsWon}
 		})
+
 		playerDataMapped.sort(function(a,b){
 			if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-     		else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+     	else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       		return 0;
 		})
-		console.log("We are jeree")
+		
 		return res.status(200).json(playerDataMapped);
 
 	}).catch(function(error){
@@ -97,63 +104,3 @@ module.exports.generateTrophyReport = function(req,res){
     return res.status(503).json({"status" : error, "reason" : error})
   	});
 }
-
-/*
-
-ANCIENNE METHODE : A REPRENDRE PLUS TARD DANS TROPHY
-
-module.exports.downloadActivityReport = function(req, res){
-	
-	//Extract clan acronym
-	var clanId = req.params.id
-	var clanToFind = sangRoyaleFamily.find(function(clan){
-		return (clanId == clan.id)
-	})
-	var clanAcronym = findClanAcronym(clanToFind.name)
-
-	//Find good file
-	var fileName = clanAcronym + "-activity.xls"
-	var appDir = path.dirname(require.main.filename);
-	var filePath = path.join(appDir, 'download', fileName)
-	res.download(filePath, fileName)
-}
-
-module.exports.generateActivityReport = function(req,res) {
-	var nameRequested=req.params.id
-	res.status(200).write("Received")
-	var clanAcronym=""
-	console.log("Start bull job")
-	
-		var jsonResult = ctrlCrApi.getClan(nameRequested)
-	.then(function(data){
-	    console.log("Data" + JSON.stringify(data))
-	    clanAcronym=findClanAcronym(data.name);
-	    console.log("clan" + clanAcronym)
-	    var members=data.members;
-	    var membersA = members.map(function(member){
-	      return {"name":member.name, "couronnes":Number(member.clanChestCrowns), "grade": member.role, "dons-faits" : member.donations, "dons-reçus" : member.donationsReceived }
-	    })
-	    membersA.sort(function(a,b){
-
-	      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-     	  else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-      	  return 0;
-	    })
-
-		var xls = json2xls(membersA)
-		exportExcel(xls, clanAcronym + "-activity.xls")
-		console.log('Job fini')
-		res.status(200).send("OK")
-
-	})
-	.catch(function(error){
-    	console.log("Error" + error)
-  	});
-   
-}
-
-
-
-
-
-*/
