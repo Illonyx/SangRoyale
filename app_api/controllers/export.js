@@ -1,25 +1,6 @@
 var fs = require('fs')
 var path = require('path')
-
 var ctrlCrApi = require('./crapi')
-
-var sangRoyaleFamily = [
-    {"name":"Sang Royale", "id":"CJQLP2"}, 
-    {"name":"Sang Royale II", "id":"2LUU0R0L"}, 
-    {"name":"Sang Royale III", "id":"8CPG2YU"}, 
-    {"name":"Sang Royale IV", "id":"8GQL980P"}, 
-    {"name":"Sang Royale V", "id":"8VVGJPCR"}]
-
-var formatPlayerResult = function(played,wins){
-  if(played == 0) return "NP"
-  var result = ""
-  for(var i=0;i<played;i++){
-    if(i<wins) result += "W"
-    else result += "L"
-  }
-  return result
-
-}
 
 module.exports.generateGdcReport = function(req,res) {
 	var clanId=req.params.id

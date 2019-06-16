@@ -102,9 +102,6 @@ module.exports.parseClanWarLog = function(clanId, data) {
     var allParticipants = [];
     var renderParams = [];
 
-   
-
-
     //Tous les participants existants
     data.forEach(function(clanwar){
       
