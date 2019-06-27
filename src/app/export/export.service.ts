@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 
 import * as FileSaver from 'file-saver';
@@ -8,14 +7,6 @@ import * as XLSX from 'xlsx';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
- 
-export interface FileCheckObject {
-  id : string;
-  file : string;
-  mdate : string;
-  //mdate_activity : string;
-  //mdate_trophies : string;
-}
 
 export interface Report {
   data : string,
@@ -32,11 +23,6 @@ export class ExportService {
 constructor(
   private httpClient: HttpClient
 ) {}
-
-  getFileCheck() : Observable<FileCheckObject[]> {
-    return this.httpClient.get<FileCheckObject[]>('/api/filecheck');
-  };
-
 
   generateReport(report: Report){
     var urlToRequest = "/api/generate/" + report.type + "/" + report.data;

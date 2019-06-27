@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { ExportService } from './export.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {FormControl} from '@angular/forms';
+import {DateAdapter} from '@angular/material';
+
 
 export interface Clan {
   id : string;
@@ -32,6 +34,7 @@ export class ExportComponent {
 
   dateMin = new FormControl();
   dateMax = new FormControl(new Date());
+  checked : boolean = false;
 
   clans : Clan[] = [
     {"name":"Sang Royale", "id":"CJQLP2"}, //Problème sur l'ID de Sang Royale
@@ -42,7 +45,9 @@ export class ExportComponent {
     
   types : string[] = ["GDC", "Trophées"];
 
-  constructor(private exportService: ExportService){}
+  constructor(private dateAdapter: DateAdapter<Date>, private exportService: ExportService) {
+    this.dateAdapter.setLocale('fr');   
+  }
 
   findClanAcronym = function(clanName){
     var acronym = ""
@@ -85,7 +90,7 @@ export class ExportComponent {
         renderParams = that.filterByDate(that.dateMin, that.dateMax, renderParams);
 
         //Tri sur les dates à appliquer (sens croissant/décroissant)
-        renderParams = that.sortByDate(false, renderParams);
+        renderParams = that.sortByDate(renderParams);
 
         //Préparation de la première ligne du rapport
         data = that.exportService.formatGdcReport(renderParams, participants);
@@ -116,12 +121,14 @@ export class ExportComponent {
     } else return renderParams;
   }
 
-  sortByDate(recentFirst : boolean, renderParams){
+  sortByDate(renderParams){
 
-    if(recentFirst) return renderParams; 
-    else {
-      return renderParams;
-    }
+    if(this.checked){
+      //Tri à faire en fonction des dates :)
+      return renderParams.sort(function(clanwar1, clanwar2){
+        return clanwar1.createdDate - clanwar2.createdDate;
+      })
+    } else return renderParams;
 
   }
   

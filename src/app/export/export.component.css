@@ -34,3 +34,6 @@
   border-color: rgb(150, 0, 0);
 }
 
+.example-margin {
+  margin: 0 10px;
+}

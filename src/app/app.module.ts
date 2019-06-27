@@ -13,6 +13,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import { AppComponent } from './app.component';
@@ -29,7 +30,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule, ReactiveFormsModule,
     AppRoutingModule, 
     HttpClientModule, 
-    MatCardModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatProgressBarModule, MatNativeDateModule, MatDatepickerModule, MatInputModule
+    MatCardModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatProgressBarModule, MatNativeDateModule, MatDatepickerModule, MatInputModule, MatCheckboxModule
 
   ],
   declarations: [
