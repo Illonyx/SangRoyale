@@ -113,7 +113,7 @@ module.exports.parseClanWarLog = function(clanId, data) {
 
       //Put it in render params object
       renderParams.push({
-        createdDate : createdDate,
+        createdDate : clanwar.createdDate*1000,
         cardsEarnedLabel : "cardsEarned-" + date,
         finalResultLabel : "finalResult-" + date,
         standingStat : warResult.standing,

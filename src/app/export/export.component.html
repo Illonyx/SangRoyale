@@ -1,4 +1,3 @@
-
 <div id="export-card-container">
 <mat-card>
   <mat-card-title>Interface d'export des rapports Sang Royale</mat-card-title>
@@ -6,15 +5,15 @@
     <br/>
 
     <!-- Clans -->
-    <h4>Sélectionner le clan pour lequel générer un rapport</h4>
-    <mat-form-field>
-      <mat-label>Selection du clan</mat-label>
-      <mat-select [(ngModel)]="selectedClan" name="clan" required>
-        <mat-option *ngFor="let clan of clans" [value]="clan">{{clan.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-  <!-- DatePicker a mettre -->
+    <div class="form-group">
+      <mat-form-field>
+          <mat-label>Selection du clan</mat-label>
+          <mat-select [(ngModel)]="selectedClan" name="clan" required>
+            <mat-option *ngFor="let clan of clans" [value]="clan">{{clan.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+    
 
     <!-- Types de rapport disponible -->
     <h4>Sélectionner le type de rapport à générer</h4>
@@ -25,16 +24,37 @@
       </mat-select>
     </mat-form-field>
 
-<!--
-    <mat-card id="download-container" *ngIf="selectedClan != null && selectedType != null">
-      <mat-card-content>
+    <!-- Formulaire spécifique de gestion GDC -->
+    <div id="specific-gdc-filters" *ngIf="selectedType=='GDC'">
+      <h4>Informations supplémentaires pour l'export GDC (facultatif) </h4>
+      <div class="row">
+        <div class="col-3 form-group form-inline">
+          <mat-form-field>
+            <input matInput [formControl]="dateMin" [matDatepicker]="pickerMin" placeholder="Date minimale pour laquelle l'export doit commencer">
+            <mat-datepicker-toggle matSuffix [for]="pickerMin"></mat-datepicker-toggle>
+            <mat-datepicker #pickerMin></mat-datepicker>
+          </mat-form-field>
+         
+        </div>
+        <div class="col-3">
+            <mat-form-field>
+              <input matInput [formControl]="dateMax" [matDatepicker]="pickerMax" placeholder="Date maximale pour laquelle l'export doit finir">
+              <mat-datepicker-toggle matSuffix [for]="pickerMax"></mat-datepicker-toggle>
+              <mat-datepicker #pickerMax></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col">
+          <p>Horaire</p>
+        </div>
+
+
+      </div>
+     
         
-      </mat-card-content>
-      
-      
-      
-    </mat-card>
-  -->
+    </div>
+    
+   
+
 
   </mat-card-content>
 

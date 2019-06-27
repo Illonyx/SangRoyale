@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ExportService } from './export.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {FormControl} from '@angular/forms';
 
 export interface Clan {
   id : string;
@@ -27,6 +29,9 @@ export class ExportComponent {
   progressValue : number;
   raisedError : boolean = false;
   errorReason : string;
+
+  dateMin = new FormControl();
+  dateMax = new FormControl(new Date());
 
   clans : Clan[] = [
     {"name":"Sang Royale", "id":"CJQLP2"}, //Problème sur l'ID de Sang Royale
@@ -76,10 +81,14 @@ export class ExportComponent {
         let renderParams : Array<GdcRenderParam> = data.renderParams;
         let participants : Array<any> = data.participants;
 
+        //Filtre sur les dates à appliquer
+        renderParams = that.filterByDate(that.dateMin, that.dateMax, renderParams);
+
+        //Tri sur les dates à appliquer (sens croissant/décroissant)
+        renderParams = that.sortByDate(false, renderParams);
+
         //Préparation de la première ligne du rapport
-        let firstLine : object = that.renderFirstLine(renderParams);
-        participants.unshift(firstLine);
-        data = participants;
+        data = that.exportService.formatGdcReport(renderParams, participants);
       }
 
       let reportName = that.selectedType + "-" + that.findClanAcronym(that.selectedClan.name);
@@ -94,26 +103,26 @@ export class ExportComponent {
 
   }
 
-  renderFirstLine(renderParams : Array<GdcRenderParam>){
+  filterByDate(dateMin, dateMax, renderParams){
 
-    //Tri à faire en fonction des dates :)
-    //data.sort(function(clanwar1, clanwar2){
-    //  return clanwar1.createdDate - clanwar2.createdDate;
-    //})
-
-    //Parcourir les renderParams
-    var firstLineToken : Object = {
-      name : "Toutes guerres", 
-      tag : '/'
-    };
-    renderParams.forEach(function(renderParam){
-      firstLineToken[renderParam.cardsEarnedLabel] = renderParam.standingStat;
-      firstLineToken[renderParam.finalResultLabel] = renderParam.battleStat;
-    })
-
-    return firstLineToken;
+    if(dateMin.value && dateMax.value){
+      let dateMinValue : Date = dateMin.value;
+      let dateMaxValue : Date = dateMax.value;
+  
+      return renderParams.filter(function(renderParam){
+        console.log("az-" + renderParam.createdDate.valueOf() + "az2-" + dateMinValue.valueOf() + "/az3-" + renderParam.createdDate.valueOf() + "/az4-" + dateMaxValue.valueOf());
+        return renderParam.createdDate.valueOf() >= dateMinValue.valueOf() && renderParam.createdDate.valueOf() <= dateMaxValue.valueOf();
+      })
+    } else return renderParams;
   }
 
+  sortByDate(recentFirst : boolean, renderParams){
 
+    if(recentFirst) return renderParams; 
+    else {
+      return renderParams;
+    }
+
+  }
   
 }

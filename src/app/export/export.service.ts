@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as _ from 'lodash';
 
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -57,6 +58,36 @@ constructor(
       type: EXCEL_TYPE
     });
     FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
+  }
+
+  public formatGdcReport(renderParams, participants){
+    
+    let table = [];
+    table.push("name");
+    table.push("tag");
+
+    //Imprimer la 1ere ligne du rapport Excel
+    var firstLineToken : Object = {
+      name : "Toutes guerres", 
+      tag : '/'
+    };
+    
+    renderParams.forEach(function(renderParam){
+      firstLineToken[renderParam.cardsEarnedLabel] = renderParam.standingStat;
+      firstLineToken[renderParam.finalResultLabel] = renderParam.battleStat;
+      table.push(renderParam.cardsEarnedLabel);
+      table.push(renderParam.finalResultLabel);
+    })
+
+    //Sélectionner les participants selon les filtres choisis
+    participants = participants.map(function(participant){
+      return _.transform(participant, function(result, value, key) {
+        if(_.includes(table, key)) result[key] = value;
+      }, {});
+    })
+
+    participants.unshift(firstLineToken);
+    return participants;
   }
 
 }
