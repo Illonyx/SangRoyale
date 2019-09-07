@@ -11,7 +11,7 @@ export interface Clan {
 }
 
 export interface GdcRenderParam {
-  createdDate : number,
+  warEndTime : number,
   cardsEarnedLabel : string,
   finalResultLabel : string,
   standingStat : string,
@@ -115,8 +115,8 @@ export class ExportComponent {
       let dateMaxValue : Date = dateMax.value;
   
       return renderParams.filter(function(renderParam){
-        console.log("az-" + renderParam.createdDate.valueOf() + "az2-" + dateMinValue.valueOf() + "/az3-" + renderParam.createdDate.valueOf() + "/az4-" + dateMaxValue.valueOf());
-        return renderParam.createdDate.valueOf() >= dateMinValue.valueOf() && renderParam.createdDate.valueOf() <= dateMaxValue.valueOf();
+        //console.log("az-" + renderParam.warEndTime.valueOf() + "az2-" + dateMinValue.valueOf() + "/az3-" + renderParam.warEndTime.valueOf() + "/az4-" + dateMaxValue.valueOf());
+        return renderParam.warEndTime.valueOf() >= dateMinValue.valueOf() && renderParam.warEndTime.valueOf() <= dateMaxValue.valueOf();
       })
     } else return renderParams;
   }
@@ -126,7 +126,7 @@ export class ExportComponent {
     if(this.checked){
       //Tri à faire en fonction des dates :)
       return renderParams.sort(function(clanwar1, clanwar2){
-        return clanwar1.createdDate - clanwar2.createdDate;
+        return clanwar1.warEndTime - clanwar2.warEndTime;
       })
     } else return renderParams;
 

@@ -105,15 +105,15 @@ module.exports.parseClanWarLog = function(clanId, data) {
     //Tous les participants existants
     data.forEach(function(clanwar){
       
-      //Get creation date
-      var createdDate = new Date(parseInt(clanwar.createdDate)*1000);
-      var date = createdDate.getDate() + "-" + (createdDate.getMonth()+1) + "-" + createdDate.getFullYear();
+      //Get war end time
+      var warEndTime = new Date(Date.parse(clanwar.warEndTime));
+      var date = warEndTime.getDate() + "-" + (warEndTime.getMonth()+1) + "-" + warEndTime.getFullYear();
 
       var warResult = formatWarResult(clanwar.standings, clanId);
 
       //Put it in render params object
       renderParams.push({
-        createdDate : clanwar.createdDate*1000,
+        warEndTime : warEndTime.getTime(),
         cardsEarnedLabel : "cardsEarned-" + date,
         finalResultLabel : "finalResult-" + date,
         standingStat : warResult.standing,
