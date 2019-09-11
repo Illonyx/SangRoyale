@@ -1,0 +1,11 @@
+.jumbotron {
+    margin : 0px 60px 0px 60px;
+    background-color: lightgray;
+}
+
+.home-carousel {
+    width : 50%;
+    margin : 0 auto;
+    margin-top : 60px;
+}
+

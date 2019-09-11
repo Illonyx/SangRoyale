@@ -1,0 +1,51 @@
+<div class="jumbotron">
+  <h1 class="display-4">Sang Royale lance son maillot e-sport pour la PGW</h1>
+  <p class="lead">Aide nous à le choisir. Deux des participants au sondage gagneront un Pass Royale.</p>
+  <hr class="my-4">
+  <p>Les résultats du tirage au sort seront annoncés <b>en fin de mois sur Discord</b>! Bonne chance à tous!</p>
+  <!--
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>
+  -->
+</div>
+
+<!-- Caroussel -->
+<ngb-carousel *ngIf="images" class="home-carousel">
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img class="img-fluid" [src]="images[0]" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>10 seconds between slides...</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img class="img-fluid" [src]="images[1]" alt="Random second slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>No mouse events...</h3>
+      <p>This carousel doesn't pause or resume on mouse events</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img class="img-fluid" [src]="images[2]"  alt="Random third slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>No keyboard...</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img class="img-fluid" [src]="images[3]" alt="Random fourth slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>And no wrap after last slide.</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template>
+</ngb-carousel>

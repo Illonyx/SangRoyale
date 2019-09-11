@@ -15,12 +15,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
+import {NgbModule, NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { ExportComponent } from './export/export.component'
 
 import { AppRoutingModule } from "./app-routing.module";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -30,12 +33,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule, ReactiveFormsModule,
     AppRoutingModule, 
     HttpClientModule, 
+    NgbModule, NgbCarouselModule,
     MatCardModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatProgressBarModule, MatNativeDateModule, MatDatepickerModule, MatInputModule, MatCheckboxModule
 
   ],
   declarations: [
     AppComponent, 
-    ExportComponent, PageNotFoundComponent
+    ExportComponent, PageNotFoundComponent, HomeComponent
   ],
   
   providers: [],
