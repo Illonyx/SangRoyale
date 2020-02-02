@@ -28,11 +28,10 @@ router.post('/login', ctrlAuth.login);
 router.get('/tournaments', ctrlTournaments.tournaments);
 
 //CrApi
-router.get('/player/:id', ctrlCrApi.getPlayer)
-router.get('/royaleapi/:id', ctrlCrApi.consumeApi)
+router.get('/crapi/:id', ctrlCrApi.consumeApi)
 
 //About
-router.get('/about',ctrlAbout.topic);
+router.get('/about', ctrlAbout.topic);
 
 //TournamentContext
 router.get('/tournamentcontext', ctrlTournamentContext.tournamentcontext)

@@ -15,14 +15,12 @@ module.exports.generateGdcReport = function(req,res) {
 
 	}).then(function(clanResult){
 		var allParticipants = parseResult.participants;
-		console.log("ClanResult :" + JSON.stringify(allParticipants))
 		var allParticipantsInClan = []
 		var allParticipantsOut = []
 		for(var i = 0; i<allParticipants.length;i++){
-			var isInClan = clanResult.members.find(function(member){
+			var isInClan = clanResult.memberList.find(function(member){
 				return member.tag==allParticipants[i].tag
 			})
-			console.log("Is in clan?" + isInClan)
 			
 			if(isInClan) allParticipantsInClan.push(allParticipants[i])
 			else allParticipantsOut.push(allParticipants[i])
@@ -33,15 +31,14 @@ module.exports.generateGdcReport = function(req,res) {
      	  else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       	  return 0;
 	    })
-	    console.log("allPIn" + JSON.stringify(allParticipantsInClan))
-			allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
-			
-			parseResult.participants=allParticipantsInClan;
+		allParticipantsInClan = allParticipantsInClan.concat(allParticipantsOut)
+
+		parseResult.participants=allParticipantsInClan;
 	    return res.status(200).json(parseResult);
 
 	})
 	.catch(function(error){
-    	console.log("Error Generate Activity Report : " + error)
+    	console.log("Error Generate Gdc Report : " + error)
     	return res.status(503).json({"status" : error, "reason" : error})
   	});
    
@@ -54,7 +51,7 @@ module.exports.generateTrophyReport = function(req,res){
 
 	return ctrlCrApi.getClan(nameRequested)
 	.then(function(data){
-		members=data.members
+		members=data.memberList
 		var memberTags = members.map(function(member){
 			return member.tag
 		})

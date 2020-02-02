@@ -6,40 +6,33 @@ const crApiSecretKey = process.env.CR_API_SECRET_KEY
 -- Gettlers (Network)
 */
 
-var get = function(extension){
-  console.log('Requête RoyaleAPI lancée à : ' + extension)
+var getRequest = function(urlExtension, queryStrings) {
+  console.log('Requête RoyaleAPI lancée à : ' + urlExtension)
   var options = {
     'method' : 'GET',
-    'uri': 'https://api.royaleapi.com/' + extension, 
-    //Add query strings - code à refactorer
-    // 'qs' : {
-    //   type: 'war'
-    // },
+    'uri': 'https://api.clashroyale.com/v1/' + urlExtension, 
     'headers': { 
       'User-Agent' : 'Sang Royale Website',
-      'auth': crApiSecretKey
+      'Authorization': 'Bearer ' + crApiSecretKey
     },
     'json' : true 
   };
+  if(queryStrings) options["qs"] = queryStrings;
   return request(options)
 }
 
 //--ROUTES
 
 var getPlayer = function(playerId){
-  return get("player/" + playerId)
+  return getRequest("player/" + playerId)
 }
 
 var getClan = function(clanId){
-  return get('clan/' + clanId)
-}
-
-var getClanBattles = function(clanId){
-  return get("clan/" + clanId + "/battles");
+  return getRequest('clans/' + "%23" + clanId)
 }
 
 module.exports.getClanWarLog = function(clanId){
-  return get('clan/' + clanId + "/warlog")
+  return getRequest('clans/' + "%23" + clanId + "/warlog")
 }
 
 module.exports.getClan = function(clanId){
@@ -54,42 +47,44 @@ module.exports.getPlayer = function(req, res){
 }
 
 module.exports.consumeApi = function(req, res){
-  var clanId = req.params.id;
-  return getClanBattles(clanId).then(function(data){
-    console.log('Données récup OK' + JSON.stringify(data));
-    //data = data.filter(function(battle){
-    //  return battle.type == "war";
-    //})
+  console.log("dd");
+  var clanId = "%23" + req.params.id;
+  return getRequest("clans/" + clanId).then(function(data){
+    //console.log('Données récup OK' + JSON.stringify(data));
    
     
     
-    res.status(200).send(data);
+    res.status(200).json(data);
   }).catch(function(error){
     res.status(500).send("Probleme de récupération des données, erreur : " + error)
   });
 }
 
 
-var formatPlayerResult = function(played,wins){
-  if(played == 0) return "NF"
+var formatPlayerResult = function(played, nbBattles, wins){
   var result = ""
-  for(var i=0;i<played;i++){
-    if(i<wins) result += "W"
-    else result += "L"
+  if(played != nbBattles) {
+    result = "NF";
+  } else {
+    for(var i=0;i<played;i++){
+      if(i<wins) result += "W"
+      else result += "L"
+    }
   }
   return result
-
 }
 
 var formatWarResult = function(standings, clanId){
   var warResult = {}
+  var trophyChange;
 
   //1. Find clan standing
   var clanStanding = standings.find(function(participatingClan){
-    return participatingClan.tag == clanId
+    if(participatingClan.clan.tag == clanId) trophyChange = participatingClan.trophyChange;
+    return participatingClan.clan.tag == clanId;
   })
-  warResult['standing'] = (standings.indexOf(clanStanding) + 1) + "e pl - " + clanStanding.warTrophies + "(" + clanStanding.warTrophiesChange +")"
-  warResult['battleStat'] = clanStanding.wins + "/" + clanStanding.participants + '(' + clanStanding.crowns +' cr)'
+  warResult['standing'] = (standings.indexOf(clanStanding) + 1) + "e pl - " + clanStanding.clan.clanScore + "(" + trophyChange +")"
+  warResult['battleStat'] = clanStanding.clan.wins + "/" + clanStanding.clan.participants + '(' + clanStanding.clan.crowns +' cr)'
 
   return warResult
 
@@ -103,13 +98,19 @@ module.exports.parseClanWarLog = function(clanId, data) {
     var renderParams = [];
 
     //Tous les participants existants
-    data.forEach(function(clanwar){
+    data.items.forEach(function(clanwar){
       
-      //Get war end time
-      var warEndTime = new Date(Date.parse(clanwar.warEndTime));
+      //Parser la date de merde en un format ISO 8601
+      var splittedDate = clanwar.createdDate.split("T")[0];
+      var splittedTime = clanwar.createdDate.split("T")[1];
+
+      var dateToParse = splittedDate.substring(0,4) + "-" + splittedDate.substring(4,6) + "-" + splittedDate.substring(6,8) + "T";
+      dateToParse += splittedTime.substring(0,2) + ":" + splittedTime.substring(2,4) + ":" + splittedTime.substring(4);
+
+      var warEndTime = new Date(dateToParse);
       var date = warEndTime.getDate() + "-" + (warEndTime.getMonth()+1) + "-" + warEndTime.getFullYear();
 
-      var warResult = formatWarResult(clanwar.standings, clanId);
+      var warResult = formatWarResult(clanwar.standings, '#' + clanId);
 
       //Put it in render params object
       renderParams.push({
@@ -124,14 +125,14 @@ module.exports.parseClanWarLog = function(clanId, data) {
       for(var i=0;i<clanwar.participants.length;i++){
         
         var participantFound = allParticipants.find(function(participant){
-          return clanwar.participants[i].tag == participant.tag;
+          return clanwar.participants[i].tag == '#' + participant.tag;
         })
         if(!participantFound){
           participantFound = {"name" : clanwar.participants[i].name, "tag" : clanwar.participants[i].tag}
           allParticipants.push(participantFound);
         }
         participantFound["cardsEarned-"+ date] = clanwar.participants[i].cardsEarned
-        participantFound["finalResult-" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].wins)
+        participantFound["finalResult-" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].numberOfBattles, clanwar.participants[i].wins)
         
         var indexToUpdate = allParticipants.indexOf(participantFound)
         if(indexToUpdate != -1) allParticipants[indexToUpdate] = participantFound
