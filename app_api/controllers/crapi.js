@@ -1,5 +1,6 @@
 const request = require('request-promise')
 const crApiSecretKey = process.env.CR_API_SECRET_KEY
+const _ = require('lodash');
 
 
 /*
@@ -122,21 +123,18 @@ module.exports.parseClanWarLog = function(clanId, data) {
       })
 
       //Browse all participants in different clan wars and add them
-      for(var i=0;i<clanwar.participants.length;i++){
-        
-        var participantFound = allParticipants.find(function(participant){
-          return clanwar.participants[i].tag == '#' + participant.tag;
-        })
+      clanwar.participants.forEach(cwparticipant => {
+        var participantFound = _.find(allParticipants, participant => participant.tag == cwparticipant.tag);
         if(!participantFound){
-          participantFound = {"name" : clanwar.participants[i].name, "tag" : clanwar.participants[i].tag}
+          participantFound = {"name" : cwparticipant.name, "tag" : cwparticipant.tag}
           allParticipants.push(participantFound);
         }
-        participantFound["cardsEarned-"+ date] = clanwar.participants[i].cardsEarned
-        participantFound["finalResult-" + date] = formatPlayerResult(clanwar.participants[i].battlesPlayed, clanwar.participants[i].numberOfBattles, clanwar.participants[i].wins)
+        participantFound["cardsEarned-"+ date] = cwparticipant.cardsEarned
+        participantFound["finalResult-" + date] = formatPlayerResult(cwparticipant.battlesPlayed, cwparticipant.numberOfBattles, cwparticipant.wins)
         
         var indexToUpdate = allParticipants.indexOf(participantFound)
         if(indexToUpdate != -1) allParticipants[indexToUpdate] = participantFound
-      }
+      });
     })
 
     //Feed all data

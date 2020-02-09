@@ -1,11 +1,22 @@
+
+/*
 .jumbotron {
     margin : 0px 60px 0px 60px;
     background-color: lightgray;
 }
+*/
 
 .home-carousel {
     width : 50%;
     margin : 0 auto;
     margin-top : 60px;
 }
+
+#header-card-container {
+    margin-right : 75px;
+    margin-left : 50px;
+    border: 3px solid;
+    border-radius: 5px;
+    border-color: rgb(150, 0, 0);
+  }
 

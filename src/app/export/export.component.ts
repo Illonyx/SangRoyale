@@ -43,7 +43,7 @@ export class ExportComponent {
     {"name":"Sang Royale IV", "id":"8GQL980P"}, 
     {"name":"Sang Royale V", "id":"8VVGJPCR"}];
     
-  types : string[] = ["GDC", "Trophées"];
+  types : string[] = ["GDC"];
 
   constructor(private dateAdapter: DateAdapter<Date>, private exportService: ExportService) {
     this.dateAdapter.setLocale('fr');   
