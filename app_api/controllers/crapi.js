@@ -1,5 +1,5 @@
 //On utilise un proxy pour aller taper dans les données api en production
-const request = (process.env.prod) ? require('request-promise').defaults({
+const request = (process.env.NODE_ENV === 'production') ? require('request-promise').defaults({
   proxy : process.env.QUOTAGUARDSTATIC_URL
 }) : require('request-promise');
 const crApiSecretKey = process.env.CR_API_SECRET_KEY
