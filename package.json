@@ -62,7 +62,7 @@
     "tslib": "^1.9.0",
     "typescript": "3.1.6",
     "webpack": "^4.16.3",
-    "xlsx": "^0.14.3",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
