@@ -38,7 +38,7 @@
     "cr.js": "^0.2.2",
     "cron-job-manager": "^1.0.7",
     "download-file": "^0.1.5",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-jwt": "^3.0.1",
     "feed": "^1.1.1",
     "file-saver": "^2.0.2",
